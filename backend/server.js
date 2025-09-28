@@ -13,6 +13,7 @@ const applicationRoutes = require('./routes/applications');
 const recruiterRoutes = require('./routes/recruiters');
 const feedbackRoutes = require('./routes/feedback');
 const analyticsRoutes = require('./routes/analytics');
+const resumeRoutes = require('./routes/resumes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -37,6 +38,7 @@ app.use('/api/applications', applicationRoutes);
 app.use('/api/recruiters', recruiterRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/resumes', resumeRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

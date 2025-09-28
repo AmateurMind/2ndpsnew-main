@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { Calendar, Building, Filter, FileText, Download, Check } from 'lucide-react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StatusBadge from '../../components/StatusBadge';
+import { openResumeSecurely } from '../../utils/resumeViewer';
 
 const statuses = [
   'applied',
@@ -194,7 +195,12 @@ const AdminApplications = () => {
                 <td className="py-2">{new Date(app.appliedAt).toLocaleDateString()}</td>
                 <td className="py-2">
                   {app.student?.resumeLink ? (
-                    <a href={app.student.resumeLink} target="_blank" rel="noreferrer" className="btn-outline text-xs">View</a>
+                    <button 
+                      onClick={() => openResumeSecurely(app.student.id, app.student.name)}
+                      className="btn-outline text-xs"
+                    >
+                      View Resume
+                    </button>
                   ) : '-' }
                 </td>
               </tr>
@@ -216,7 +222,12 @@ const AdminApplications = () => {
             <p className="text-sm text-secondary-600 flex items-center mt-1"><Building className="h-4 w-4 mr-1"/>{app.internship?.title} • {app.internship?.company}</p>
             <p className="text-xs text-secondary-500 flex items-center mt-1"><Calendar className="h-3 w-3 mr-1"/>Applied {new Date(app.appliedAt).toLocaleDateString()}</p>
             {app.student?.resumeLink && (
-              <a href={app.student.resumeLink} target="_blank" rel="noreferrer" className="btn-outline mt-3 text-xs">View Resume</a>
+              <button 
+                onClick={() => openResumeSecurely(app.student.id, app.student.name)}
+                className="btn-outline mt-3 text-xs"
+              >
+                View Resume
+              </button>
             )}
             <div className="mt-3">
               <label className="text-xs font-medium">Update Status</label>

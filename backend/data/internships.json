@@ -263,7 +263,9 @@
       "assembly"
     ],
     "eligibleDepartments": [
-      "Electronics"
+      "Electronics",
+      "Computer Science",
+      "Information Technology"
     ],
     "minimumSemester": 4,
     "minimumCGPA": 6,

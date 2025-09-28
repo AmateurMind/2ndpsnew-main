@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { openResumeSecurely } from '../../utils/resumeViewer';
 
 const StudentProfile = () => {
   const { user, setUser } = useAuth();
@@ -61,7 +62,7 @@ const StudentProfile = () => {
             <Field label="CGPA" value={String(user.cgpa)} />
             <Field label="Phone" value={user.phone} />
             <Field label="Address" value={user.address} />
-            <Field label="Resume" value={user.resumeLink} isLink />
+            <Field label="Resume" value={user.resumeLink} studentId={user.id} studentName={user.name} isResume />
             <div className="sm:col-span-2">
               <label className="text-sm font-medium text-secondary-700">Skills</label>
               <div className="mt-1 flex flex-wrap gap-1">
@@ -95,10 +96,17 @@ const StudentProfile = () => {
   );
 };
 
-const Field = ({ label, value, isLink }) => (
+const Field = ({ label, value, isLink, isResume, studentId, studentName }) => (
   <div>
     <label className="text-sm font-medium text-secondary-700">{label}</label>
-    {isLink && value ? (
+    {isResume && value ? (
+      <button 
+        onClick={() => openResumeSecurely(studentId, studentName)}
+        className="block text-primary-600 mt-1 hover:text-primary-700 underline text-left break-words"
+      >
+        View Resume (Secure)
+      </button>
+    ) : isLink && value ? (
       <a href={value} target="_blank" rel="noreferrer" className="block text-primary-600 mt-1 break-words">{value}</a>
     ) : (
       <p className="text-secondary-900 break-words">{value || '-'}</p>
