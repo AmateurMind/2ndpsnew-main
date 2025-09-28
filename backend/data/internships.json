@@ -81,7 +81,7 @@
     "applicationDeadline": "2024-04-20T23:59:59.000Z",
     "startDate": "2024-05-15T00:00:00.000Z",
     "maxApplications": 30,
-    "currentApplications": 18,
+    "currentApplications": 19,
     "status": "active",
     "companyDescription": "Leading data analytics firm providing insights to Fortune 500 companies.",
     "requirements": [
@@ -309,7 +309,7 @@
       "Information Technology"
     ],
     "minimumSemester": 5,
-    "minimumCGPA": 7.0,
+    "minimumCGPA": 7,
     "stipend": "₹25,000/month",
     "duration": "6 months",
     "location": "Bangalore",
@@ -530,7 +530,7 @@
       "Information Technology"
     ],
     "minimumSemester": 5,
-    "minimumCGPA": 7.0,
+    "minimumCGPA": 7,
     "stipend": "₹24,000/month",
     "duration": "5 months",
     "location": "Mumbai",

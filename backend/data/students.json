@@ -8,7 +8,13 @@
     "department": "Computer Science",
     "semester": 6,
     "cgpa": 8.5,
-    "skills": ["JavaScript", "React", "Node.js", "Python", "MongoDB"],
+    "skills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Python",
+      "MongoDB"
+    ],
     "resumeLink": "https://example.com/resumes/aarav-sharma.pdf",
     "phone": "+91-9876543210",
     "address": "123 College Street, Delhi",
@@ -18,14 +24,22 @@
       {
         "title": "E-commerce Website",
         "description": "Full-stack e-commerce platform with React and Node.js",
-        "technologies": ["React", "Node.js", "MongoDB"],
+        "technologies": [
+          "React",
+          "Node.js",
+          "MongoDB"
+        ],
         "githubLink": "https://github.com/aarav/ecommerce"
       }
     ],
-    "achievements": ["First Prize in Hackathon 2023", "Dean's List"],
+    "achievements": [
+      "First Prize in Hackathon 2023",
+      "Dean's List"
+    ],
     "isPlaced": false,
     "placementStatus": "active",
-    "createdAt": "2023-08-01T00:00:00.000Z"
+    "createdAt": "2023-08-01T00:00:00.000Z",
+    "updatedAt": "2025-09-28T18:56:47.934Z"
   },
   {
     "id": "STU002",
@@ -36,7 +50,13 @@
     "department": "Information Technology",
     "semester": 6,
     "cgpa": 8.8,
-    "skills": ["Java", "Spring Boot", "MySQL", "React", "AWS"],
+    "skills": [
+      "Java",
+      "Spring Boot",
+      "MySQL",
+      "React",
+      "AWS"
+    ],
     "resumeLink": "https://example.com/resumes/priya-patel.pdf",
     "phone": "+91-9876543211",
     "address": "456 Tech Avenue, Mumbai",
@@ -46,11 +66,18 @@
       {
         "title": "Hospital Management System",
         "description": "Web application for managing hospital operations",
-        "technologies": ["Java", "Spring Boot", "MySQL"],
+        "technologies": [
+          "Java",
+          "Spring Boot",
+          "MySQL"
+        ],
         "githubLink": "https://github.com/priya/hospital-mgmt"
       }
     ],
-    "achievements": ["Google Developer Challenge Winner", "Technical Lead - Coding Club"],
+    "achievements": [
+      "Google Developer Challenge Winner",
+      "Technical Lead - Coding Club"
+    ],
     "isPlaced": false,
     "placementStatus": "active",
     "createdAt": "2023-08-01T00:00:00.000Z"
@@ -64,7 +91,13 @@
     "department": "Computer Science",
     "semester": 8,
     "cgpa": 7.9,
-    "skills": ["Python", "Django", "PostgreSQL", "Machine Learning", "Docker"],
+    "skills": [
+      "Python",
+      "Django",
+      "PostgreSQL",
+      "Machine Learning",
+      "Docker"
+    ],
     "resumeLink": "https://example.com/resumes/rohit-kumar.pdf",
     "phone": "+91-9876543212",
     "address": "789 Silicon Valley, Bangalore",
@@ -74,11 +107,18 @@
       {
         "title": "AI Chatbot",
         "description": "Intelligent chatbot using NLP and machine learning",
-        "technologies": ["Python", "TensorFlow", "Flask"],
+        "technologies": [
+          "Python",
+          "TensorFlow",
+          "Flask"
+        ],
         "githubLink": "https://github.com/rohit/ai-chatbot"
       }
     ],
-    "achievements": ["Best Final Year Project", "AI Research Paper Published"],
+    "achievements": [
+      "Best Final Year Project",
+      "AI Research Paper Published"
+    ],
     "isPlaced": true,
     "placementStatus": "placed",
     "placedAt": {
@@ -98,7 +138,13 @@
     "department": "Electronics",
     "semester": 6,
     "cgpa": 8.2,
-    "skills": ["C++", "Embedded Systems", "Arduino", "IoT", "MATLAB"],
+    "skills": [
+      "C++",
+      "Embedded Systems",
+      "Arduino",
+      "IoT",
+      "MATLAB"
+    ],
     "resumeLink": "https://example.com/resumes/sneha-reddy.pdf",
     "phone": "+91-9876543213",
     "address": "321 Innovation Hub, Hyderabad",
@@ -108,11 +154,18 @@
       {
         "title": "Smart Home Automation",
         "description": "IoT-based home automation system",
-        "technologies": ["Arduino", "IoT", "Mobile App"],
+        "technologies": [
+          "Arduino",
+          "IoT",
+          "Mobile App"
+        ],
         "githubLink": "https://github.com/sneha/smart-home"
       }
     ],
-    "achievements": ["IEEE Project Competition Winner", "Electronics Society President"],
+    "achievements": [
+      "IEEE Project Competition Winner",
+      "Electronics Society President"
+    ],
     "isPlaced": false,
     "placementStatus": "active",
     "createdAt": "2023-08-01T00:00:00.000Z"
@@ -126,7 +179,13 @@
     "department": "Information Technology",
     "semester": 4,
     "cgpa": 7.8,
-    "skills": ["JavaScript", "Vue.js", "Firebase", "GraphQL", "TypeScript"],
+    "skills": [
+      "JavaScript",
+      "Vue.js",
+      "Firebase",
+      "GraphQL",
+      "TypeScript"
+    ],
     "resumeLink": "https://example.com/resumes/arjun-gupta.pdf",
     "phone": "+91-9876543214",
     "address": "654 Digital Lane, Pune",
@@ -136,11 +195,18 @@
       {
         "title": "Task Management App",
         "description": "Real-time collaborative task management platform",
-        "technologies": ["Vue.js", "Firebase", "GraphQL"],
+        "technologies": [
+          "Vue.js",
+          "Firebase",
+          "GraphQL"
+        ],
         "githubLink": "https://github.com/arjun/task-manager"
       }
     ],
-    "achievements": ["Mozilla Open Source Contributor", "Hackathon Finalist"],
+    "achievements": [
+      "Mozilla Open Source Contributor",
+      "Hackathon Finalist"
+    ],
     "isPlaced": false,
     "placementStatus": "active",
     "createdAt": "2023-08-01T00:00:00.000Z"
