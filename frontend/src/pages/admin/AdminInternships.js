@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { Plus, Pencil, Trash2, MapPin, DollarSign, Clock, Building } from 'lucide-react';
+import { Plus, Pencil, Trash2, MapPin, DollarSign, Clock, Building, X } from 'lucide-react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 const emptyForm = {
@@ -34,6 +34,24 @@ const AdminInternships = () => {
   useEffect(() => {
     fetchInternships();
   }, []);
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && showForm) {
+        setShowForm(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [showForm]);
+
+  const handleModalClick = (e) => {
+    // Close modal if clicking on backdrop
+    if (e.target === e.currentTarget) {
+      setShowForm(false);
+    }
+  };
 
   const fetchInternships = async () => {
     try {
@@ -208,13 +226,30 @@ const AdminInternships = () => {
 
       {/* Modal Form */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg w-full max-w-2xl">
-            <div className="flex items-center justify-between border-b border-secondary-200 p-4">
-              <h2 className="text-lg sm:text-xl font-semibold">{isEditing ? 'Edit Internship' : 'New Internship'}</h2>
-              <button className="btn-secondary" onClick={() => setShowForm(false)}>Close</button>
+        <div 
+          className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto"
+          onClick={handleModalClick}
+        >
+          <div 
+            className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] flex flex-col my-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-secondary-200 p-4 flex-shrink-0">
+              <h2 className="text-lg sm:text-xl font-semibold text-secondary-900">{isEditing ? 'Edit Internship' : 'New Internship'}</h2>
+              <div className="flex items-center gap-2">
+                <button type="button" className="btn-secondary" onClick={() => setShowForm(false)}>Close</button>
+                <button 
+                  type="button" 
+                  className="p-2 hover:bg-secondary-100 rounded-lg transition-colors"
+                  onClick={() => setShowForm(false)}
+                  title="Close modal"
+                >
+                  <X className="h-5 w-5 text-secondary-600" />
+                </button>
+              </div>
             </div>
-            <form onSubmit={saveForm} className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex-1 overflow-y-auto">
+              <form onSubmit={saveForm} className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-sm font-medium">Title</label>
                 <input className="input-field" value={form.title} onChange={(e)=>setForm({...form,title:e.target.value})} required />
@@ -283,11 +318,12 @@ const AdminInternships = () => {
                 <label className="text-sm font-medium">Max Applications</label>
                 <input type="number" className="input-field" value={form.maxApplications} onChange={(e)=>setForm({...form,maxApplications:e.target.value})} />
               </div>
-              <div className="sm:col-span-2 flex justify-end gap-2">
-                <button type="button" className="btn-secondary" onClick={()=>setShowForm(false)}>Cancel</button>
-                <button type="submit" className="btn-primary">{isEditing ? 'Update' : 'Create'}</button>
-              </div>
-            </form>
+                <div className="sm:col-span-2 flex justify-end gap-2 pt-4 border-t border-secondary-200 mt-4">
+                  <button type="button" className="btn-secondary" onClick={()=>setShowForm(false)}>Cancel</button>
+                  <button type="submit" className="btn-primary">{isEditing ? 'Update' : 'Create'}</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}

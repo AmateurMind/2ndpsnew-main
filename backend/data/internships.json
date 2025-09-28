@@ -249,5 +249,38 @@
     ],
     "createdAt": "2024-02-28T00:00:00.000Z",
     "postedBy": "ADM001"
+  },
+  {
+    "id": "INT006",
+    "title": "abc",
+    "company": "ac",
+    "companyLogo": "asd",
+    "description": "asdsa",
+    "requiredSkills": [
+      "Python"
+    ],
+    "preferredSkills": [
+      "assembly"
+    ],
+    "eligibleDepartments": [
+      "Electronics"
+    ],
+    "minimumSemester": 4,
+    "minimumCGPA": 6,
+    "stipend": "20000",
+    "duration": "3 Months",
+    "location": "Delhi",
+    "workMode": "On-site",
+    "applicationDeadline": "2025-10-11T00:00:00.000Z",
+    "startDate": "2025-09-28T00:00:00.000Z",
+    "maxApplications": 50,
+    "currentApplications": 0,
+    "status": "active",
+    "companyDescription": "",
+    "requirements": [],
+    "benefits": [],
+    "createdAt": "2025-09-28T16:53:09.552Z",
+    "postedBy": "ADM001",
+    "updatedAt": "2025-09-28T16:55:33.977Z"
   }
 ]
