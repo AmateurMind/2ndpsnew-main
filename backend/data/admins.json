@@ -1,0 +1,28 @@
+[
+  {
+    "id": "ADM001",
+    "name": "Dr. Sunita Mehta",
+    "email": "sunita.mehta@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "admin",
+    "designation": "Placement Officer",
+    "department": "Placement Cell",
+    "phone": "+91-9876500123",
+    "profilePicture": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150",
+    "permissions": ["manage_internships", "view_all_applications", "generate_reports", "manage_users"],
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  },
+  {
+    "id": "ADM002",
+    "name": "Prof. Ramesh Gupta",
+    "email": "ramesh.gupta@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "admin",
+    "designation": "Dean - Student Affairs",
+    "department": "Administration",
+    "phone": "+91-9876500124",
+    "profilePicture": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "permissions": ["view_analytics", "approve_internships", "manage_mentors"],
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  }
+]

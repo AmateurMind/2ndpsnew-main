@@ -1,0 +1,59 @@
+[
+  {
+    "id": "REC001",
+    "name": "Amit Singh",
+    "email": "amit.singh@techcorp.com",
+    "password": "$2a$10$example.hash.here",
+    "role": "recruiter",
+    "company": "TechCorp Solutions",
+    "designation": "Technical Recruiter",
+    "phone": "+91-9876400123",
+    "profilePicture": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "companyDetails": {
+      "website": "https://techcorp.com",
+      "industry": "Information Technology",
+      "size": "500-1000 employees",
+      "location": "Bangalore"
+    },
+    "permissions": ["view_eligible_students", "schedule_interviews", "post_internships"],
+    "createdAt": "2024-01-15T00:00:00.000Z"
+  },
+  {
+    "id": "REC002",
+    "name": "Priya Sharma",
+    "email": "priya.sharma@datatech.com",
+    "password": "$2a$10$example.hash.here",
+    "role": "recruiter",
+    "company": "DataTech Analytics",
+    "designation": "HR Manager",
+    "phone": "+91-9876400124",
+    "profilePicture": "https://images.unsplash.com/photo-1494790108755-2616b612b641?w=150",
+    "companyDetails": {
+      "website": "https://datatech-analytics.com",
+      "industry": "Data Analytics",
+      "size": "200-500 employees",
+      "location": "Mumbai"
+    },
+    "permissions": ["view_eligible_students", "conduct_interviews", "make_offers"],
+    "createdAt": "2024-01-20T00:00:00.000Z"
+  },
+  {
+    "id": "REC003",
+    "name": "Rajesh Patel",
+    "email": "rajesh.patel@smarttech.com",
+    "password": "$2a$10$example.hash.here",
+    "role": "recruiter",
+    "company": "SmartTech Solutions",
+    "designation": "Talent Acquisition Lead",
+    "phone": "+91-9876400125",
+    "profilePicture": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "companyDetails": {
+      "website": "https://smarttech-solutions.com",
+      "industry": "IoT & Hardware",
+      "size": "100-200 employees",
+      "location": "Hyderabad"
+    },
+    "permissions": ["view_eligible_students", "technical_evaluation", "final_selection"],
+    "createdAt": "2024-02-01T00:00:00.000Z"
+  }
+]

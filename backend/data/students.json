@@ -1,0 +1,148 @@
+[
+  {
+    "id": "STU001",
+    "name": "Aarav Sharma",
+    "email": "aarav.sharma@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "student",
+    "department": "Computer Science",
+    "semester": 6,
+    "cgpa": 8.5,
+    "skills": ["JavaScript", "React", "Node.js", "Python", "MongoDB"],
+    "resumeLink": "https://example.com/resumes/aarav-sharma.pdf",
+    "phone": "+91-9876543210",
+    "address": "123 College Street, Delhi",
+    "dateOfBirth": "2002-03-15",
+    "profilePicture": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "projects": [
+      {
+        "title": "E-commerce Website",
+        "description": "Full-stack e-commerce platform with React and Node.js",
+        "technologies": ["React", "Node.js", "MongoDB"],
+        "githubLink": "https://github.com/aarav/ecommerce"
+      }
+    ],
+    "achievements": ["First Prize in Hackathon 2023", "Dean's List"],
+    "isPlaced": false,
+    "placementStatus": "active",
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  },
+  {
+    "id": "STU002",
+    "name": "Priya Patel",
+    "email": "priya.patel@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "student",
+    "department": "Information Technology",
+    "semester": 6,
+    "cgpa": 8.8,
+    "skills": ["Java", "Spring Boot", "MySQL", "React", "AWS"],
+    "resumeLink": "https://example.com/resumes/priya-patel.pdf",
+    "phone": "+91-9876543211",
+    "address": "456 Tech Avenue, Mumbai",
+    "dateOfBirth": "2002-07-22",
+    "profilePicture": "https://images.unsplash.com/photo-1494790108755-2616b612b641?w=150",
+    "projects": [
+      {
+        "title": "Hospital Management System",
+        "description": "Web application for managing hospital operations",
+        "technologies": ["Java", "Spring Boot", "MySQL"],
+        "githubLink": "https://github.com/priya/hospital-mgmt"
+      }
+    ],
+    "achievements": ["Google Developer Challenge Winner", "Technical Lead - Coding Club"],
+    "isPlaced": false,
+    "placementStatus": "active",
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  },
+  {
+    "id": "STU003",
+    "name": "Rohit Kumar",
+    "email": "rohit.kumar@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "student",
+    "department": "Computer Science",
+    "semester": 8,
+    "cgpa": 7.9,
+    "skills": ["Python", "Django", "PostgreSQL", "Machine Learning", "Docker"],
+    "resumeLink": "https://example.com/resumes/rohit-kumar.pdf",
+    "phone": "+91-9876543212",
+    "address": "789 Silicon Valley, Bangalore",
+    "dateOfBirth": "2001-11-10",
+    "profilePicture": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "projects": [
+      {
+        "title": "AI Chatbot",
+        "description": "Intelligent chatbot using NLP and machine learning",
+        "technologies": ["Python", "TensorFlow", "Flask"],
+        "githubLink": "https://github.com/rohit/ai-chatbot"
+      }
+    ],
+    "achievements": ["Best Final Year Project", "AI Research Paper Published"],
+    "isPlaced": true,
+    "placementStatus": "placed",
+    "placedAt": {
+      "company": "TechCorp Solutions",
+      "position": "Software Developer",
+      "package": "12 LPA",
+      "joinDate": "2024-07-01"
+    },
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  },
+  {
+    "id": "STU004",
+    "name": "Sneha Reddy",
+    "email": "sneha.reddy@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "student",
+    "department": "Electronics",
+    "semester": 6,
+    "cgpa": 8.2,
+    "skills": ["C++", "Embedded Systems", "Arduino", "IoT", "MATLAB"],
+    "resumeLink": "https://example.com/resumes/sneha-reddy.pdf",
+    "phone": "+91-9876543213",
+    "address": "321 Innovation Hub, Hyderabad",
+    "dateOfBirth": "2002-05-18",
+    "profilePicture": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
+    "projects": [
+      {
+        "title": "Smart Home Automation",
+        "description": "IoT-based home automation system",
+        "technologies": ["Arduino", "IoT", "Mobile App"],
+        "githubLink": "https://github.com/sneha/smart-home"
+      }
+    ],
+    "achievements": ["IEEE Project Competition Winner", "Electronics Society President"],
+    "isPlaced": false,
+    "placementStatus": "active",
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  },
+  {
+    "id": "STU005",
+    "name": "Arjun Gupta",
+    "email": "arjun.gupta@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "student",
+    "department": "Information Technology",
+    "semester": 4,
+    "cgpa": 7.8,
+    "skills": ["JavaScript", "Vue.js", "Firebase", "GraphQL", "TypeScript"],
+    "resumeLink": "https://example.com/resumes/arjun-gupta.pdf",
+    "phone": "+91-9876543214",
+    "address": "654 Digital Lane, Pune",
+    "dateOfBirth": "2003-01-25",
+    "profilePicture": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+    "projects": [
+      {
+        "title": "Task Management App",
+        "description": "Real-time collaborative task management platform",
+        "technologies": ["Vue.js", "Firebase", "GraphQL"],
+        "githubLink": "https://github.com/arjun/task-manager"
+      }
+    ],
+    "achievements": ["Mozilla Open Source Contributor", "Hackathon Finalist"],
+    "isPlaced": false,
+    "placementStatus": "active",
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  }
+]

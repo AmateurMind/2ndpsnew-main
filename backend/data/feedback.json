@@ -1,0 +1,36 @@
+[
+  {
+    "id": "FB001",
+    "studentId": "STU003",
+    "internshipId": "INT001",
+    "applicationId": "APP007",
+    "type": "completion_feedback",
+    "feedback": "Rohit has shown exceptional skills in frontend development during his internship. He successfully delivered all assigned projects and demonstrated strong problem-solving abilities.",
+    "rating": 4.5,
+    "skills_developed": ["Advanced React", "Redux", "API Integration", "Team Collaboration"],
+    "completion_status": "completed",
+    "certificate_issued": true,
+    "certificate_url": "https://example.com/certificates/rohit-kumar-frontend.pdf",
+    "mentor_feedback": "Outstanding intern with great potential for full-time role.",
+    "company_feedback": "Excellent work quality and professional attitude.",
+    "createdAt": "2024-01-15T00:00:00.000Z",
+    "updatedAt": "2024-01-15T00:00:00.000Z"
+  },
+  {
+    "id": "FB002",
+    "studentId": "STU002",
+    "internshipId": "INT002",
+    "applicationId": "APP002",
+    "type": "mid_term_feedback",
+    "feedback": "Priya is performing well in the data science projects. She has shown good analytical skills and is quick to learn new technologies.",
+    "rating": 4.0,
+    "skills_developed": ["Advanced Python", "TensorFlow", "Data Visualization", "Statistical Analysis"],
+    "completion_status": "in_progress",
+    "certificate_issued": false,
+    "certificate_url": null,
+    "mentor_feedback": "Good progress, needs to work on presentation skills.",
+    "company_feedback": "Technical skills are strong, communication improving.",
+    "createdAt": "2024-02-20T00:00:00.000Z",
+    "updatedAt": "2024-02-20T00:00:00.000Z"
+  }
+]

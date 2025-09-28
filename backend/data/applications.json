@@ -1,0 +1,143 @@
+[
+  {
+    "id": "APP001",
+    "studentId": "STU001",
+    "internshipId": "INT001",
+    "status": "rejected",
+    "appliedAt": "2024-03-15T10:30:00.000Z",
+    "coverLetter": "I am excited to apply for the Frontend Development Intern position. My experience with React and JavaScript makes me a perfect fit for this role.",
+    "mentorId": "MEN001",
+    "mentorApproval": "rejected",
+    "mentorFeedback": "",
+    "interviewScheduled": null,
+    "interviewFeedback": null,
+    "finalStatus": null,
+    "updatedAt": "2025-09-28T14:14:09.037Z"
+  },
+  {
+    "id": "APP002",
+    "studentId": "STU002",
+    "internshipId": "INT002",
+    "status": "approved",
+    "appliedAt": "2024-03-10T14:20:00.000Z",
+    "coverLetter": "With my strong background in machine learning and Python, I am eager to contribute to your data science projects.",
+    "mentorId": "MEN002",
+    "mentorApproval": "approved",
+    "mentorFeedback": "Excellent academic record and relevant skills. Highly recommended.",
+    "interviewScheduled": {
+      "date": "2024-03-25T10:00:00.000Z",
+      "interviewer": "Senior Data Scientist",
+      "mode": "Video Call",
+      "meetingLink": "https://meet.google.com/xyz-abc-def"
+    },
+    "interviewFeedback": "Strong technical knowledge and good communication skills.",
+    "finalStatus": "selected",
+    "updatedAt": "2024-03-22T16:45:00.000Z"
+  },
+  {
+    "id": "APP003",
+    "studentId": "STU001",
+    "internshipId": "INT003",
+    "status": "rejected",
+    "appliedAt": "2024-03-08T09:15:00.000Z",
+    "coverLetter": "I would like to explore mobile app development and gain practical experience in this field.",
+    "mentorId": "MEN001",
+    "mentorApproval": "rejected",
+    "mentorFeedback": "Student lacks sufficient mobile development experience. Recommend focusing on web technologies first.",
+    "interviewScheduled": null,
+    "interviewFeedback": null,
+    "finalStatus": "rejected",
+    "updatedAt": "2024-03-12T11:30:00.000Z"
+  },
+  {
+    "id": "APP004",
+    "studentId": "STU004",
+    "internshipId": "INT004",
+    "status": "interview_scheduled",
+    "appliedAt": "2024-03-12T16:45:00.000Z",
+    "coverLetter": "My background in electronics and IoT projects makes me an ideal candidate for this internship opportunity.",
+    "mentorId": "MEN003",
+    "mentorApproval": "approved",
+    "mentorFeedback": "Strong technical background in electronics. Good fit for IoT role.",
+    "interviewScheduled": {
+      "date": "2024-03-28T14:00:00.000Z",
+      "interviewer": "IoT Team Lead",
+      "mode": "In-person",
+      "location": "Hyderabad Office"
+    },
+    "interviewFeedback": null,
+    "finalStatus": null,
+    "updatedAt": "2024-03-20T09:15:00.000Z"
+  },
+  {
+    "id": "APP005",
+    "studentId": "STU005",
+    "internshipId": "INT001",
+    "status": "applied",
+    "appliedAt": "2024-03-18T11:00:00.000Z",
+    "coverLetter": "I am passionate about frontend development and excited to work with modern React technologies.",
+    "mentorId": "MEN002",
+    "mentorApproval": null,
+    "mentorFeedback": null,
+    "interviewScheduled": null,
+    "interviewFeedback": null,
+    "finalStatus": null,
+    "updatedAt": "2024-03-18T11:00:00.000Z"
+  },
+  {
+    "id": "APP006",
+    "studentId": "STU002",
+    "internshipId": "INT005",
+    "status": "offered",
+    "appliedAt": "2024-03-05T13:30:00.000Z",
+    "coverLetter": "My experience with backend technologies and cloud platforms aligns perfectly with your requirements.",
+    "mentorId": "MEN002",
+    "mentorApproval": "approved",
+    "mentorFeedback": "Outstanding student with excellent technical skills and leadership qualities.",
+    "interviewScheduled": {
+      "date": "2024-03-20T15:30:00.000Z",
+      "interviewer": "Backend Team Lead",
+      "mode": "Video Call",
+      "meetingLink": "https://zoom.us/j/123456789"
+    },
+    "interviewFeedback": "Exceptional performance in technical interview. Strong problem-solving skills.",
+    "finalStatus": "offered",
+    "offerDetails": {
+      "stipend": "₹22,000/month",
+      "startDate": "2024-04-30T00:00:00.000Z",
+      "duration": "6 months",
+      "offerExpiry": "2024-04-01T23:59:59.000Z"
+    },
+    "updatedAt": "2024-03-22T10:20:00.000Z"
+  },
+  {
+    "id": "APP007",
+    "studentId": "STU002",
+    "internshipId": "INT003",
+    "status": "applied",
+    "appliedAt": "2025-09-28T06:00:53.812Z",
+    "coverLetter": "lkjh",
+    "mentorId": null,
+    "mentorApproval": null,
+    "mentorFeedback": null,
+    "interviewScheduled": null,
+    "interviewFeedback": null,
+    "finalStatus": null,
+    "updatedAt": "2025-09-28T06:00:53.812Z"
+  },
+  {
+    "id": "APP008",
+    "studentId": "STU001",
+    "internshipId": "INT005",
+    "status": "approved",
+    "appliedAt": "2025-09-28T06:18:21.685Z",
+    "coverLetter": "asd",
+    "mentorId": "MEN001",
+    "mentorApproval": "approved",
+    "mentorFeedback": "",
+    "interviewScheduled": null,
+    "interviewFeedback": null,
+    "finalStatus": null,
+    "updatedAt": "2025-09-28T06:18:32.047Z"
+  }
+]

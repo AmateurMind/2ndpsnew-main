@@ -1,0 +1,47 @@
+[
+  {
+    "id": "MEN001",
+    "name": "Dr. Rajesh Kumar",
+    "email": "rajesh.kumar@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "mentor",
+    "department": "Computer Science",
+    "designation": "Professor",
+    "phone": "+91-9876501234",
+    "profilePicture": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150",
+    "specialization": ["Data Structures", "Algorithms", "Software Engineering"],
+    "experience": 12,
+    "qualifications": ["PhD in Computer Science", "MTech in Software Engineering"],
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  },
+  {
+    "id": "MEN002",
+    "name": "Dr. Priyanka Singh",
+    "email": "priyanka.singh@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "mentor",
+    "department": "Information Technology",
+    "designation": "Associate Professor",
+    "phone": "+91-9876501235",
+    "profilePicture": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150",
+    "specialization": ["Database Systems", "Web Technologies", "Cloud Computing"],
+    "experience": 8,
+    "qualifications": ["PhD in Information Technology", "BE in Computer Engineering"],
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  },
+  {
+    "id": "MEN003",
+    "name": "Prof. Amit Verma",
+    "email": "amit.verma@college.edu",
+    "password": "$2a$10$example.hash.here",
+    "role": "mentor",
+    "department": "Electronics",
+    "designation": "Assistant Professor",
+    "phone": "+91-9876501236",
+    "profilePicture": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150",
+    "specialization": ["Embedded Systems", "IoT", "Digital Signal Processing"],
+    "experience": 6,
+    "qualifications": ["MTech in Electronics", "BE in Electronics & Communication"],
+    "createdAt": "2023-08-01T00:00:00.000Z"
+  }
+]

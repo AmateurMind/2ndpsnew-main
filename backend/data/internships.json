@@ -1,0 +1,253 @@
+[
+  {
+    "id": "INT001",
+    "title": "Frontend Development Intern",
+    "company": "TechCorp Solutions",
+    "companyLogo": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100",
+    "description": "Work on cutting-edge React applications with our frontend team. You'll be involved in building responsive user interfaces and implementing modern web technologies.",
+    "requiredSkills": [
+      "JavaScript",
+      "React",
+      "HTML",
+      "CSS",
+      "Git"
+    ],
+    "preferredSkills": [
+      "TypeScript",
+      "Redux",
+      "Tailwind CSS"
+    ],
+    "eligibleDepartments": [
+      "Computer Science",
+      "Information Technology"
+    ],
+    "minimumSemester": 5,
+    "minimumCGPA": 7.5,
+    "stipend": "₹15,000/month",
+    "duration": "3 months",
+    "location": "Bangalore",
+    "workMode": "Hybrid",
+    "applicationDeadline": "2024-04-15T23:59:59.000Z",
+    "startDate": "2024-05-01T00:00:00.000Z",
+    "maxApplications": 50,
+    "currentApplications": 23,
+    "status": "active",
+    "companyDescription": "A leading technology company specializing in web development and digital solutions.",
+    "requirements": [
+      "Strong understanding of JavaScript fundamentals",
+      "Experience with React.js framework",
+      "Knowledge of responsive web design",
+      "Familiarity with version control (Git)"
+    ],
+    "benefits": [
+      "Mentorship from senior developers",
+      "Flexible working hours",
+      "Certificate of completion",
+      "Potential for full-time offer"
+    ],
+    "createdAt": "2024-03-01T00:00:00.000Z",
+    "postedBy": "ADM001"
+  },
+  {
+    "id": "INT002",
+    "title": "Data Science Intern",
+    "company": "DataTech Analytics",
+    "companyLogo": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100",
+    "description": "Join our data science team to work on machine learning projects and data analysis. Gain hands-on experience with real-world datasets.",
+    "requiredSkills": [
+      "Python",
+      "Machine Learning",
+      "Pandas",
+      "NumPy",
+      "SQL"
+    ],
+    "preferredSkills": [
+      "TensorFlow",
+      "Scikit-learn",
+      "Tableau",
+      "R"
+    ],
+    "eligibleDepartments": [
+      "Computer Science",
+      "Information Technology",
+      "Mathematics"
+    ],
+    "minimumSemester": 6,
+    "minimumCGPA": 8,
+    "stipend": "₹20,000/month",
+    "duration": "6 months",
+    "location": "Mumbai",
+    "workMode": "Remote",
+    "applicationDeadline": "2024-04-20T23:59:59.000Z",
+    "startDate": "2024-05-15T00:00:00.000Z",
+    "maxApplications": 30,
+    "currentApplications": 18,
+    "status": "active",
+    "companyDescription": "Leading data analytics firm providing insights to Fortune 500 companies.",
+    "requirements": [
+      "Strong programming skills in Python",
+      "Understanding of statistical concepts",
+      "Experience with data manipulation libraries",
+      "Basic knowledge of machine learning algorithms"
+    ],
+    "benefits": [
+      "Work on real client projects",
+      "Access to premium data science tools",
+      "Industry certification",
+      "Networking opportunities"
+    ],
+    "createdAt": "2024-03-05T00:00:00.000Z",
+    "postedBy": "ADM001"
+  },
+  {
+    "id": "INT003",
+    "title": "Mobile App Development Intern",
+    "company": "AppCraft Studios",
+    "companyLogo": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=100",
+    "description": "Develop mobile applications for Android and iOS platforms. Work with cross-platform technologies and learn modern mobile development practices.",
+    "requiredSkills": [
+      "Java",
+      "Kotlin",
+      "React Native",
+      "JavaScript"
+    ],
+    "preferredSkills": [
+      "Flutter",
+      "Swift",
+      "Firebase",
+      "RESTful APIs"
+    ],
+    "eligibleDepartments": [
+      "Computer Science",
+      "Information Technology"
+    ],
+    "minimumSemester": 4,
+    "minimumCGPA": 7,
+    "stipend": "₹12,000/month",
+    "duration": "4 months",
+    "location": "Pune",
+    "workMode": "On-site",
+    "applicationDeadline": "2024-04-25T23:59:59.000Z",
+    "startDate": "2024-05-10T00:00:00.000Z",
+    "maxApplications": 40,
+    "currentApplications": 32,
+    "status": "active",
+    "companyDescription": "Mobile app development studio creating innovative solutions for startups and enterprises.",
+    "requirements": [
+      "Experience with mobile development frameworks",
+      "Understanding of mobile UI/UX principles",
+      "Knowledge of API integration",
+      "Problem-solving and debugging skills"
+    ],
+    "benefits": [
+      "Mentorship from industry experts",
+      "Project-based learning",
+      "Certificate and recommendation letter",
+      "Flexible internship hours"
+    ],
+    "createdAt": "2024-03-08T00:00:00.000Z",
+    "postedBy": "ADM001"
+  },
+  {
+    "id": "INT004",
+    "title": "IoT Development Intern",
+    "company": "SmartTech Solutions",
+    "companyLogo": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100",
+    "description": "Work on Internet of Things (IoT) projects involving hardware and software integration. Perfect for electronics and computer science students.",
+    "requiredSkills": [
+      "C++",
+      "Arduino",
+      "Raspberry Pi",
+      "Sensors",
+      "Microcontrollers"
+    ],
+    "preferredSkills": [
+      "Python",
+      "MQTT",
+      "Node.js",
+      "Mobile App Development"
+    ],
+    "eligibleDepartments": [
+      "Electronics",
+      "Computer Science",
+      "Electrical"
+    ],
+    "minimumSemester": 5,
+    "minimumCGPA": 7.5,
+    "stipend": "₹18,000/month",
+    "duration": "5 months",
+    "location": "Hyderabad",
+    "workMode": "On-site",
+    "applicationDeadline": "2024-04-18T23:59:59.000Z",
+    "startDate": "2024-05-05T00:00:00.000Z",
+    "maxApplications": 25,
+    "currentApplications": 15,
+    "status": "active",
+    "companyDescription": "Pioneering company in IoT solutions for smart cities and industrial automation.",
+    "requirements": [
+      "Strong foundation in electronics and programming",
+      "Experience with microcontroller programming",
+      "Understanding of sensor integration",
+      "Basic knowledge of wireless communication"
+    ],
+    "benefits": [
+      "Hands-on hardware experience",
+      "Industry project exposure",
+      "Technical skill development",
+      "Full-time placement opportunities"
+    ],
+    "createdAt": "2024-03-10T00:00:00.000Z",
+    "postedBy": "ADM001"
+  },
+  {
+    "id": "INT005",
+    "title": "Backend Development Intern",
+    "company": "CloudTech Systems",
+    "companyLogo": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=100",
+    "description": "Develop robust backend systems and APIs using modern technologies. Learn about microservices, databases, and cloud deployment.",
+    "requiredSkills": [
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "RESTful APIs",
+      "Git"
+    ],
+    "preferredSkills": [
+      "Docker",
+      "AWS",
+      "Redis",
+      "GraphQL",
+      "Microservices"
+    ],
+    "eligibleDepartments": [
+      "Computer Science",
+      "Information Technology"
+    ],
+    "minimumSemester": 6,
+    "minimumCGPA": 8,
+    "stipend": "₹22,000/month",
+    "duration": "6 months",
+    "location": "Delhi",
+    "workMode": "Hybrid",
+    "applicationDeadline": "2024-04-12T23:59:59.000Z",
+    "startDate": "2024-04-30T00:00:00.000Z",
+    "maxApplications": 35,
+    "currentApplications": 29,
+    "status": "active",
+    "companyDescription": "Cloud-first technology company providing scalable backend solutions.",
+    "requirements": [
+      "Proficiency in server-side programming",
+      "Experience with databases and data modeling",
+      "Understanding of API design principles",
+      "Knowledge of version control systems"
+    ],
+    "benefits": [
+      "Cloud technology exposure",
+      "Scalable system design learning",
+      "Industry standard practices",
+      "Performance bonus potential"
+    ],
+    "createdAt": "2024-02-28T00:00:00.000Z",
+    "postedBy": "ADM001"
+  }
+]
