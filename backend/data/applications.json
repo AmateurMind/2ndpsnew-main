@@ -139,5 +139,20 @@
     "interviewFeedback": null,
     "finalStatus": null,
     "updatedAt": "2025-09-28T06:18:32.047Z"
+  },
+  {
+    "id": "APP009",
+    "studentId": "STU001",
+    "internshipId": "INT006",
+    "status": "offered",
+    "appliedAt": "2025-09-28T17:36:45.326Z",
+    "coverLetter": "nice",
+    "mentorId": "MEN001",
+    "mentorApproval": "approved",
+    "mentorFeedback": "nice",
+    "interviewScheduled": null,
+    "interviewFeedback": null,
+    "finalStatus": null,
+    "updatedAt": "2025-09-28T17:41:51.978Z"
   }
 ]

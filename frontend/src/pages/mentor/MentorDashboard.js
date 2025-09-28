@@ -3,6 +3,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { CheckCircle2, XCircle, FileText, Calendar, Building, MessageSquare } from 'lucide-react';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { openResumeSecurely } from '../../utils/resumeViewer';
 
 const MentorDashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -92,14 +93,12 @@ const MentorDashboard = () => {
                         <p className="text-sm font-medium text-secondary-900">Applicant: {app.student.name}</p>
                         <p className="text-xs text-secondary-600">{app.student.email} • {app.student.department} • CGPA {app.student.cgpa}</p>
                         {app.student.resumeLink && (
-                          <a
-                            href={app.student.resumeLink}
-                            target="_blank"
-                            rel="noreferrer"
+                          <button
+                            onClick={() => openResumeSecurely(app.student.id, app.student.name)}
                             className="inline-block mt-2 btn-outline text-xs sm:text-sm"
                           >
                             View Resume
-                          </a>
+                          </button>
                         )}
                       </div>
                     )}

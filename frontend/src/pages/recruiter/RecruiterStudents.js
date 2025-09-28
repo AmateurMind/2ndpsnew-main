@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { Search, Filter, GraduationCap, Bookmark, CheckCircle2 } from 'lucide-react';
+import { Search, Filter, CheckCircle2, Bookmark, GraduationCap } from 'lucide-react';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { openResumeSecurely } from '../../utils/resumeViewer';
 
 const RecruiterStudents = () => {
   const [loading, setLoading] = useState(true);
@@ -126,7 +127,7 @@ const RecruiterStudents = () => {
                   {shortlist.includes(s.id) ? 'Shortlisted' : 'Shortlist'}
                 </button>
                 {s.resumeLink && (
-                  <a href={s.resumeLink} target="_blank" rel="noreferrer" className="btn-secondary text-sm">View Resume</a>
+                  <button onClick={() => openResumeSecurely(s.id, s.name)} className="btn-secondary text-sm">View Resume</button>
                 )}
               </div>
             </div>
