@@ -312,13 +312,19 @@ const StudentDashboard = () => {
               </div>
 
               <div className="mt-4 pt-4 border-t border-secondary-200">
-                <Link 
-                  to={`/student/internships`}
-                  className="w-full sm:w-auto btn-outline text-sm py-2 flex items-center justify-center"
-                >
-                  View Details
-                  <ArrowRight className="h-3 w-3 ml-1" />
-                </Link>
+                {internship.hasApplied ? (
+                  <span className="w-full sm:w-auto btn-success text-sm py-2 flex items-center justify-center cursor-not-allowed">
+                    Applied
+                  </span>
+                ) : (
+                  <Link 
+                    to={`/student/internships`}
+                    className="w-full sm:w-auto btn-outline text-sm py-2 flex items-center justify-center"
+                  >
+                    View Details
+                    <ArrowRight className="h-3 w-3 ml-1" />
+                  </Link>
+                )}
               </div>
             </div>
           ))}

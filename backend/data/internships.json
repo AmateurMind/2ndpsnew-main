@@ -284,5 +284,334 @@
     "createdAt": "2025-09-28T16:53:09.552Z",
     "postedBy": "ADM001",
     "updatedAt": "2025-09-28T16:55:33.977Z"
+  },
+  {
+    "id": "INT007",
+    "title": "Full Stack Development Intern",
+    "company": "TechCorp Solutions",
+    "companyLogo": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100",
+    "description": "Join our dynamic team to work on cutting-edge web applications using modern tech stack. You'll contribute to both frontend and backend development while learning industry best practices.",
+    "requiredSkills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Express.js"
+    ],
+    "preferredSkills": [
+      "TypeScript",
+      "AWS",
+      "Docker",
+      "GraphQL"
+    ],
+    "eligibleDepartments": [
+      "Computer Science",
+      "Information Technology"
+    ],
+    "minimumSemester": 5,
+    "minimumCGPA": 7.0,
+    "stipend": "₹25,000/month",
+    "duration": "6 months",
+    "location": "Bangalore",
+    "workMode": "Hybrid",
+    "applicationDeadline": "2024-12-15T23:59:59.000Z",
+    "startDate": "2025-01-15T00:00:00.000Z",
+    "maxApplications": 40,
+    "currentApplications": 12,
+    "status": "active",
+    "companyDescription": "TechCorp Solutions is a leading technology company specializing in enterprise software solutions and digital transformation services.",
+    "requirements": [
+      "Strong foundation in web development",
+      "Experience with JavaScript frameworks",
+      "Understanding of RESTful APIs",
+      "Good problem-solving skills",
+      "Team collaboration experience"
+    ],
+    "benefits": [
+      "Mentorship from senior developers",
+      "Flexible working hours",
+      "Learning and development budget",
+      "Potential for full-time conversion",
+      "Modern tech stack exposure"
+    ],
+    "createdAt": "2024-11-01T09:00:00.000Z",
+    "postedBy": "REC001",
+    "postedByRole": "recruiter"
+  },
+  {
+    "id": "INT008",
+    "title": "Data Analytics Intern",
+    "company": "DataTech Analytics",
+    "companyLogo": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100",
+    "description": "Work with our data science team on real-world analytics projects. Gain hands-on experience with data visualization, statistical analysis, and machine learning implementations.",
+    "requiredSkills": [
+      "Python",
+      "SQL",
+      "Pandas",
+      "NumPy",
+      "Data Visualization"
+    ],
+    "preferredSkills": [
+      "Machine Learning",
+      "Tableau",
+      "Power BI",
+      "R",
+      "Spark"
+    ],
+    "eligibleDepartments": [
+      "Computer Science",
+      "Information Technology",
+      "Mathematics",
+      "Statistics"
+    ],
+    "minimumSemester": 6,
+    "minimumCGPA": 7.5,
+    "stipend": "₹28,000/month",
+    "duration": "5 months",
+    "location": "Mumbai",
+    "workMode": "Remote",
+    "applicationDeadline": "2024-12-20T23:59:59.000Z",
+    "startDate": "2025-01-10T00:00:00.000Z",
+    "maxApplications": 25,
+    "currentApplications": 8,
+    "status": "active",
+    "companyDescription": "DataTech Analytics provides advanced analytics solutions to Fortune 500 companies, helping them make data-driven decisions.",
+    "requirements": [
+      "Strong analytical and mathematical skills",
+      "Experience with Python data libraries",
+      "Understanding of statistical concepts",
+      "Curiosity for data patterns and insights",
+      "Excellent communication skills"
+    ],
+    "benefits": [
+      "Work on real client projects",
+      "Access to premium data tools",
+      "Industry certification opportunities",
+      "Networking with data professionals",
+      "Performance-based bonus"
+    ],
+    "createdAt": "2024-11-02T10:30:00.000Z",
+    "postedBy": "REC002",
+    "postedByRole": "recruiter"
+  },
+  {
+    "id": "INT009",
+    "title": "Hardware Engineering Intern",
+    "company": "SmartTech Solutions",
+    "companyLogo": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100",
+    "description": "Join our hardware team to work on innovative IoT devices and embedded systems. Perfect opportunity for electronics and computer engineering students to gain practical experience.",
+    "requiredSkills": [
+      "Circuit Design",
+      "PCB Design",
+      "Embedded C",
+      "Microcontrollers",
+      "Digital Electronics"
+    ],
+    "preferredSkills": [
+      "FPGA Programming",
+      "VHDL/Verilog",
+      "Signal Processing",
+      "RF Design",
+      "CAD Tools"
+    ],
+    "eligibleDepartments": [
+      "Electronics",
+      "Electrical",
+      "Computer Science"
+    ],
+    "minimumSemester": 5,
+    "minimumCGPA": 7.2,
+    "stipend": "₹22,000/month",
+    "duration": "6 months",
+    "location": "Hyderabad",
+    "workMode": "On-site",
+    "applicationDeadline": "2024-12-10T23:59:59.000Z",
+    "startDate": "2025-01-20T00:00:00.000Z",
+    "maxApplications": 20,
+    "currentApplications": 5,
+    "status": "active",
+    "companyDescription": "SmartTech Solutions is a pioneering company in IoT and embedded systems, creating innovative solutions for smart cities and industrial automation.",
+    "requirements": [
+      "Strong foundation in electronics and circuit design",
+      "Hands-on experience with microcontrollers",
+      "Understanding of embedded programming",
+      "Knowledge of testing and debugging techniques",
+      "Attention to detail and precision"
+    ],
+    "benefits": [
+      "Hands-on hardware experience",
+      "Access to modern lab facilities",
+      "Patent filing opportunities",
+      "Industry project exposure",
+      "Full-time placement consideration"
+    ],
+    "createdAt": "2024-11-03T14:15:00.000Z",
+    "postedBy": "REC003",
+    "postedByRole": "recruiter"
+  },
+  {
+    "id": "INT010",
+    "title": "Digital Marketing Intern",
+    "company": "TechCorp Solutions",
+    "companyLogo": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100",
+    "description": "Support our marketing team in digital campaigns, content creation, and social media management. Learn modern marketing techniques and analytics tools.",
+    "requiredSkills": [
+      "Content Writing",
+      "Social Media",
+      "Google Analytics",
+      "SEO Basics",
+      "Graphic Design"
+    ],
+    "preferredSkills": [
+      "Adobe Creative Suite",
+      "Email Marketing",
+      "PPC Advertising",
+      "Video Editing",
+      "Marketing Automation"
+    ],
+    "eligibleDepartments": [
+      "Computer Science",
+      "Information Technology",
+      "Management",
+      "Commerce"
+    ],
+    "minimumSemester": 4,
+    "minimumCGPA": 6.5,
+    "stipend": "₹18,000/month",
+    "duration": "4 months",
+    "location": "Bangalore",
+    "workMode": "Hybrid",
+    "applicationDeadline": "2024-12-25T23:59:59.000Z",
+    "startDate": "2025-02-01T00:00:00.000Z",
+    "maxApplications": 30,
+    "currentApplications": 15,
+    "status": "active",
+    "companyDescription": "Join our growing marketing team to learn digital marketing strategies that drive business growth in the technology sector.",
+    "requirements": [
+      "Strong communication skills",
+      "Creative thinking and problem-solving",
+      "Basic understanding of digital platforms",
+      "Eagerness to learn new marketing tools",
+      "Analytical mindset"
+    ],
+    "benefits": [
+      "Learn from industry experts",
+      "Access to premium marketing tools",
+      "Portfolio building opportunities",
+      "Flexible work arrangements",
+      "Certificate of completion"
+    ],
+    "createdAt": "2024-11-04T11:20:00.000Z",
+    "postedBy": "REC001",
+    "postedByRole": "recruiter"
+  },
+  {
+    "id": "INT011",
+    "title": "Mobile App Development Intern",
+    "company": "DataTech Analytics",
+    "companyLogo": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100",
+    "description": "Develop mobile applications for our analytics platform. Work with React Native and native development while learning mobile-first design principles.",
+    "requiredSkills": [
+      "React Native",
+      "JavaScript",
+      "Mobile UI/UX",
+      "API Integration",
+      "Git"
+    ],
+    "preferredSkills": [
+      "Native iOS/Android",
+      "Flutter",
+      "Redux",
+      "Firebase",
+      "App Store Deployment"
+    ],
+    "eligibleDepartments": [
+      "Computer Science",
+      "Information Technology"
+    ],
+    "minimumSemester": 5,
+    "minimumCGPA": 7.0,
+    "stipend": "₹24,000/month",
+    "duration": "5 months",
+    "location": "Mumbai",
+    "workMode": "Hybrid",
+    "applicationDeadline": "2024-12-18T23:59:59.000Z",
+    "startDate": "2025-01-25T00:00:00.000Z",
+    "maxApplications": 35,
+    "currentApplications": 18,
+    "status": "active",
+    "companyDescription": "Help us build the next generation of mobile analytics tools that businesses rely on for data-driven decision making.",
+    "requirements": [
+      "Experience with React Native or similar frameworks",
+      "Understanding of mobile development lifecycle",
+      "Knowledge of RESTful API consumption",
+      "Familiarity with version control systems",
+      "Problem-solving and debugging skills"
+    ],
+    "benefits": [
+      "Work on production mobile apps",
+      "Learn from senior mobile developers",
+      "Access to latest development tools",
+      "App Store publishing experience",
+      "Competitive stipend with bonuses"
+    ],
+    "createdAt": "2024-11-05T16:45:00.000Z",
+    "postedBy": "REC002",
+    "postedByRole": "recruiter"
+  },
+  {
+    "id": "INT012",
+    "title": "Cloud Infrastructure Intern",
+    "company": "SmartTech Solutions",
+    "companyLogo": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100",
+    "description": "Work with our DevOps team to manage cloud infrastructure, deployment pipelines, and monitoring systems. Perfect for students interested in cloud computing and automation.",
+    "requiredSkills": [
+      "Linux",
+      "AWS/Azure Basics",
+      "Docker",
+      "Shell Scripting",
+      "Networking Fundamentals"
+    ],
+    "preferredSkills": [
+      "Kubernetes",
+      "Terraform",
+      "CI/CD Pipelines",
+      "Monitoring Tools",
+      "Python Automation"
+    ],
+    "eligibleDepartments": [
+      "Computer Science",
+      "Information Technology",
+      "Electronics"
+    ],
+    "minimumSemester": 6,
+    "minimumCGPA": 7.3,
+    "stipend": "₹26,000/month",
+    "duration": "6 months",
+    "location": "Hyderabad",
+    "workMode": "On-site",
+    "applicationDeadline": "2024-12-12T23:59:59.000Z",
+    "startDate": "2025-01-08T00:00:00.000Z",
+    "maxApplications": 15,
+    "currentApplications": 7,
+    "status": "active",
+    "companyDescription": "Learn cloud-native technologies and DevOps practices while working on real production infrastructure that serves thousands of IoT devices.",
+    "requirements": [
+      "Strong understanding of Linux systems",
+      "Basic knowledge of cloud platforms",
+      "Scripting and automation experience",
+      "Understanding of networking concepts",
+      "Interest in infrastructure and operations"
+    ],
+    "benefits": [
+      "AWS/Azure certification support",
+      "Work with cutting-edge cloud technologies",
+      "Mentorship from senior DevOps engineers",
+      "Real production environment experience",
+      "High potential for full-time conversion"
+    ],
+    "createdAt": "2024-11-06T13:30:00.000Z",
+    "postedBy": "REC003",
+    "postedByRole": "recruiter"
   }
 ]

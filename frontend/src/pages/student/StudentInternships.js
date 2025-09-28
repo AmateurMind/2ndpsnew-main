@@ -27,6 +27,9 @@ const StudentInternships = () => {
   };
 
   const handleApply = async (internship) => {
+    if (internship.hasApplied || !internship.isEligible) {
+      return; // Don't open modal for already applied or ineligible internships
+    }
     setSelectedInternship(internship);
     setShowApplicationModal(true);
   };
@@ -40,6 +43,13 @@ const StudentInternships = () => {
       toast.success('Application submitted successfully!');
       setShowApplicationModal(false);
       setApplicationData({ coverLetter: '' });
+      
+      // Update the local state to reflect the applied status
+      setInternships(prev => prev.map(internship => 
+        internship.id === selectedInternship.id 
+          ? { ...internship, hasApplied: true }
+          : internship
+      ));
     } catch (error) {
       toast.error(error.response?.data?.error || 'Failed to submit application');
     }
@@ -116,11 +126,22 @@ const StudentInternships = () => {
 
             <button 
               onClick={() => handleApply(internship)}
-              className="w-full btn-primary flex items-center justify-center"
-              disabled={!internship.isEligible}
+              className={`w-full flex items-center justify-center ${
+                internship.hasApplied 
+                  ? 'btn-success cursor-not-allowed' 
+                  : internship.isEligible 
+                    ? 'btn-primary' 
+                    : 'btn-disabled cursor-not-allowed'
+              }`}
+              disabled={!internship.isEligible || internship.hasApplied}
             >
               <Send className="h-4 w-4 mr-2" />
-              {internship.isEligible ? 'Apply Now' : 'Not Eligible'}
+              {internship.hasApplied 
+                ? 'Applied' 
+                : internship.isEligible 
+                  ? 'Apply Now' 
+                  : 'Not Eligible'
+              }
             </button>
           </div>
         ))}

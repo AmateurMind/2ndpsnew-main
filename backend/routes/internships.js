@@ -6,6 +6,7 @@ const { authenticate, authorize, optionalAuth } = require('../middleware/auth');
 const router = express.Router();
 
 const internshipsPath = path.join(__dirname, '../data/internships.json');
+const applicationsPath = path.join(__dirname, '../data/applications.json');
 
 // Helper function to read internships
 const readInternships = () => {
@@ -15,6 +16,11 @@ const readInternships = () => {
 // Helper function to write internships
 const writeInternships = (internships) => {
   fs.writeFileSync(internshipsPath, JSON.stringify(internships, null, 2));
+};
+
+// Helper function to read applications
+const readApplications = () => {
+  return JSON.parse(fs.readFileSync(applicationsPath, 'utf8'));
 };
 
 // Get all internships (with optional filtering)
@@ -63,8 +69,10 @@ router.get('/', optionalAuth, (req, res) => {
       return true;
     });
     
-    // If user is authenticated and is a student, add recommendation scores
+    // If user is authenticated and is a student, add recommendation scores and application status
     if (req.user && req.user.role === 'student') {
+      const applications = readApplications();
+      
       filteredInternships = filteredInternships.map(internship => {
         const skillMatch = internship.requiredSkills.filter(skill => 
           req.user.skills.includes(skill)
@@ -80,10 +88,16 @@ router.get('/', optionalAuth, (req, res) => {
           (semesterEligible ? 10 : 0)
         );
         
+        // Check if student has already applied to this internship
+        const hasApplied = applications.some(app => 
+          app.studentId === req.user.id && app.internshipId === internship.id
+        );
+        
         return {
           ...internship,
           recommendationScore: Math.round(recommendationScore),
-          isEligible: departmentMatch && cgpaEligible && semesterEligible
+          isEligible: departmentMatch && cgpaEligible && semesterEligible,
+          hasApplied: hasApplied
         };
       });
       
@@ -104,6 +118,22 @@ router.get('/', optionalAuth, (req, res) => {
   }
 });
 
+// Get internships posted by current recruiter (must be before /:id route)
+router.get('/my-postings', authenticate, authorize('recruiter'), (req, res) => {
+  try {
+    const internships = readInternships();
+    const myInternships = internships.filter(i => i.postedBy === req.user.id);
+    
+    res.json({
+      internships: myInternships,
+      total: myInternships.length
+    });
+  } catch (error) {
+    console.error('Error fetching recruiter internships:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Get single internship by ID
 router.get('/:id', optionalAuth, (req, res) => {
   try {
@@ -114,8 +144,10 @@ router.get('/:id', optionalAuth, (req, res) => {
       return res.status(404).json({ error: 'Internship not found' });
     }
     
-    // Add recommendation score if user is a student
+    // Add recommendation score and application status if user is a student
     if (req.user && req.user.role === 'student') {
+      const applications = readApplications();
+      
       const skillMatch = internship.requiredSkills.filter(skill => 
         req.user.skills.includes(skill)
       ).length;
@@ -130,8 +162,14 @@ router.get('/:id', optionalAuth, (req, res) => {
         (semesterEligible ? 10 : 0)
       );
       
+      // Check if student has already applied to this internship
+      const hasApplied = applications.some(app => 
+        app.studentId === req.user.id && app.internshipId === internship.id
+      );
+      
       internship.recommendationScore = Math.round(recommendationScore);
       internship.isEligible = departmentMatch && cgpaEligible && semesterEligible;
+      internship.hasApplied = hasApplied;
     }
     
     res.json(internship);
@@ -141,8 +179,8 @@ router.get('/:id', optionalAuth, (req, res) => {
   }
 });
 
-// Create new internship (admin only)
-router.post('/', authenticate, authorize('admin'), (req, res) => {
+// Create new internship (admin and recruiter)
+router.post('/', authenticate, authorize('admin', 'recruiter'), (req, res) => {
   try {
     const internships = readInternships();
     const {
@@ -169,11 +207,19 @@ router.post('/', authenticate, authorize('admin'), (req, res) => {
       });
     }
     
+    // For recruiters, auto-fill company info from their profile
+    let finalCompany = company;
+    let finalCompanyLogo = req.body.companyLogo;
+    if (req.user.role === 'recruiter') {
+      finalCompany = req.user.company || company;
+      finalCompanyLogo = req.body.companyLogo || `https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100`;
+    }
+    
     const newInternship = {
       id: `INT${String(internships.length + 1).padStart(3, '0')}`,
       title,
-      company,
-      companyLogo: req.body.companyLogo || `https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100`,
+      company: finalCompany,
+      companyLogo: finalCompanyLogo,
       description,
       requiredSkills: Array.isArray(requiredSkills) ? requiredSkills : [requiredSkills],
       preferredSkills: req.body.preferredSkills || [],
@@ -193,7 +239,8 @@ router.post('/', authenticate, authorize('admin'), (req, res) => {
       requirements: req.body.requirements || [],
       benefits: req.body.benefits || [],
       createdAt: new Date().toISOString(),
-      postedBy: req.user.id
+      postedBy: req.user.id,
+      postedByRole: req.user.role
     };
     
     internships.push(newInternship);
@@ -209,14 +256,21 @@ router.post('/', authenticate, authorize('admin'), (req, res) => {
   }
 });
 
-// Update internship (admin only)
-router.put('/:id', authenticate, authorize('admin'), (req, res) => {
+// Update internship (admin and recruiter)
+router.put('/:id', authenticate, authorize('admin', 'recruiter'), (req, res) => {
   try {
     const internships = readInternships();
     const internshipIndex = internships.findIndex(i => i.id === req.params.id);
     
     if (internshipIndex === -1) {
       return res.status(404).json({ error: 'Internship not found' });
+    }
+    
+    const existingInternship = internships[internshipIndex];
+    
+    // Recruiters can only edit their own internships
+    if (req.user.role === 'recruiter' && existingInternship.postedBy !== req.user.id) {
+      return res.status(403).json({ error: 'Access denied. You can only edit internships you posted.' });
     }
     
     const updatedInternship = {
@@ -239,14 +293,21 @@ router.put('/:id', authenticate, authorize('admin'), (req, res) => {
   }
 });
 
-// Delete internship (admin only)
-router.delete('/:id', authenticate, authorize('admin'), (req, res) => {
+// Delete internship (admin and recruiter)
+router.delete('/:id', authenticate, authorize('admin', 'recruiter'), (req, res) => {
   try {
     const internships = readInternships();
     const internshipIndex = internships.findIndex(i => i.id === req.params.id);
     
     if (internshipIndex === -1) {
       return res.status(404).json({ error: 'Internship not found' });
+    }
+    
+    const existingInternship = internships[internshipIndex];
+    
+    // Recruiters can only delete their own internships
+    if (req.user.role === 'recruiter' && existingInternship.postedBy !== req.user.id) {
+      return res.status(403).json({ error: 'Access denied. You can only delete internships you posted.' });
     }
     
     const deletedInternship = internships.splice(internshipIndex, 1)[0];
@@ -261,6 +322,7 @@ router.delete('/:id', authenticate, authorize('admin'), (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 // Get internship statistics (admin only)
 router.get('/stats/overview', authenticate, authorize('admin'), (req, res) => {

@@ -17,6 +17,7 @@ import AdminApplications from './pages/admin/AdminApplications';
 import AdminAnalytics from './pages/admin/AdminAnalytics';
 import RecruiterDashboard from './pages/recruiter/RecruiterDashboard';
 import RecruiterStudents from './pages/recruiter/RecruiterStudents';
+import RecruiterInternships from './pages/recruiter/RecruiterInternships';
 import LoadingSpinner from './components/LoadingSpinner';
 
 // Context for authentication
@@ -106,6 +107,10 @@ function AppContent() {
           <Route 
             path="/recruiter/students" 
             element={<ProtectedRoute role="recruiter"><RecruiterStudents /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/recruiter/internships" 
+            element={<ProtectedRoute role="recruiter"><RecruiterInternships /></ProtectedRoute>} 
           />
           
           {/* Default redirects */}
