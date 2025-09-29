@@ -4,6 +4,9 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 require('dotenv').config();
 
+// Import database connection
+const connectDB = require('./config/database');
+
 const authRoutes = require('./routes/auth');
 const studentRoutes = require('./routes/students');
 const mentorRoutes = require('./routes/mentors');
@@ -75,8 +78,23 @@ app.use('*', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📍 API available at http://localhost:${PORT}`);
-  console.log(`🏥 Health check at http://localhost:${PORT}/health`);
-});
+// Connect to MongoDB first, then start server
+const startServer = async () => {
+  try {
+    // Connect to MongoDB
+    await connectDB();
+    
+    // Start server
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`📍 API available at http://localhost:${PORT}`);
+      console.log(`🏥 Health check at http://localhost:${PORT}/health`);
+    });
+  } catch (error) {
+    console.error('❌ Failed to start server:', error);
+    process.exit(1);
+  }
+};
+
+// Start the server
+startServer();

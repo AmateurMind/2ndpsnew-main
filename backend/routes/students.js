@@ -1,18 +1,11 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const { authenticate, authorize, verifyStudentAccess } = require('../middleware/auth');
+const { Student, Application, Internship } = require('../models');
 const router = express.Router();
 
-const studentsPath = path.join(__dirname, '../data/students.json');
-
-const readStudents = () => JSON.parse(fs.readFileSync(studentsPath, 'utf8'));
-const writeStudents = (students) => fs.writeFileSync(studentsPath, JSON.stringify(students, null, 2));
-
 // Create a new student (admin only)
-router.post('/', authenticate, authorize('admin'), (req, res) => {
+router.post('/', authenticate, authorize('admin'), async (req, res) => {
   try {
-    const students = readStudents();
     const {
       name,
       email,
@@ -31,12 +24,14 @@ router.post('/', authenticate, authorize('admin'), (req, res) => {
       return res.status(400).json({ error: 'name, email, and department are required' });
     }
 
-    if (students.find(s => s.email === email)) {
+    const existingStudent = await Student.findOne({ email });
+    if (existingStudent) {
       return res.status(400).json({ error: 'Student with this email already exists' });
     }
 
-    const newStudent = {
-      id: `STU${String(students.length + 1).padStart(3, '0')}`,
+    const studentCount = await Student.countDocuments();
+    const newStudent = new Student({
+      id: `STU${String(studentCount + 1).padStart(3, '0')}`,
       name,
       email,
       password: '$2a$10$example.hash.here',
@@ -48,18 +43,16 @@ router.post('/', authenticate, authorize('admin'), (req, res) => {
       resumeLink,
       phone,
       address,
-      dateOfBirth,
+      dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : undefined,
       profilePicture,
       projects: [],
       achievements: [],
       isPlaced: false,
-      placementStatus: 'active',
-      createdAt: new Date().toISOString()
-    };
+      placementStatus: 'active'
+    });
 
-    students.push(newStudent);
-    writeStudents(students);
-    const { password, ...rest } = newStudent;
+    await newStudent.save();
+    const { password, ...rest } = newStudent.toObject();
     res.status(201).json({ message: 'Student created', student: rest });
   } catch (err) {
     console.error('Create student error:', err);
@@ -68,14 +61,13 @@ router.post('/', authenticate, authorize('admin'), (req, res) => {
 });
 
 // Quick demo route to add a test student (development only)
-router.post('/demo-add', (req, res) => {
+router.post('/demo-add', async (req, res) => {
   try {
-    const students = readStudents();
-    const count = students.length + 1;
-    const testStudent = {
-      id: `STU${String(count).padStart(3, '0')}`,
-      name: req.body.name || `Test Student ${count}`,
-      email: req.body.email || `test${count}@college.edu`,
+    const count = await Student.countDocuments();
+    const testStudent = new Student({
+      id: `STU${String(count + 1).padStart(3, '0')}`,
+      name: req.body.name || `Test Student ${count + 1}`,
+      email: req.body.email || `test${count + 1}@college.edu`,
       password: '$2a$10$example.hash.here',
       role: 'student',
       department: req.body.department || 'Computer Science',
@@ -85,81 +77,76 @@ router.post('/demo-add', (req, res) => {
       resumeLink: req.body.resumeLink || 'https://example.com/resume.pdf',
       phone: req.body.phone || '+91-9000000000',
       address: req.body.address || 'Demo Address',
-      dateOfBirth: req.body.dateOfBirth || '2002-01-01',
+      dateOfBirth: new Date(req.body.dateOfBirth || '2002-01-01'),
       profilePicture: req.body.profilePicture || '',
       projects: [],
       achievements: [],
       isPlaced: false,
-      placementStatus: 'active',
-      createdAt: new Date().toISOString()
-    };
-    students.push(testStudent);
-    writeStudents(students);
-    const { password, ...rest } = testStudent;
+      placementStatus: 'active'
+    });
+    await testStudent.save();
+    const { password, ...rest } = testStudent.toObject();
     res.status(201).json({ message: 'Demo student added', student: rest });
   } catch (err) {
+    console.error('Demo add error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 // Get all students (admin/mentor/recruiter only)
-router.get('/', authenticate, authorize('admin', 'mentor', 'recruiter'), verifyStudentAccess, (req, res) => {
+router.get('/', authenticate, authorize('admin', 'mentor', 'recruiter'), verifyStudentAccess, async (req, res) => {
   try {
-    const students = readStudents();
     const { department, semester, skills, cgpa } = req.query;
     
-    let filteredStudents = students.filter(student => {
-      // For recruiters, only show students who applied to their internships
-      if (req.user.role === 'recruiter' && req.allowedStudents && !req.allowedStudents.includes(student.id)) {
-        return false;
-      }
-      
-      if (department && student.department !== department) return false;
-      if (semester && student.semester !== parseInt(semester)) return false;
-      if (cgpa && student.cgpa < parseFloat(cgpa)) return false;
-      if (skills) {
-        const skillsArray = skills.split(',').map(s => s.trim());
-        const hasSkill = skillsArray.some(skill => 
-          student.skills.some(s => s.toLowerCase().includes(skill.toLowerCase()))
-        );
-        if (!hasSkill) return false;
-      }
-      return true;
-    });
+    // Build query filter
+    let query = {};
     
-    // Remove sensitive data and add application context for recruiters
-    filteredStudents = filteredStudents.map(({ password, ...student }) => {
+    // For recruiters, only show students who applied to their internships
+    if (req.user.role === 'recruiter' && req.allowedStudents) {
+      query.id = { $in: req.allowedStudents };
+    }
+    
+    if (department) query.department = department;
+    if (semester) query.semester = parseInt(semester);
+    if (cgpa) query.cgpa = { $gte: parseFloat(cgpa) };
+    if (skills) {
+      const skillsArray = skills.split(',').map(s => s.trim());
+      query.skills = { $in: skillsArray.map(skill => new RegExp(skill, 'i')) };
+    }
+    
+    const students = await Student.find(query).select('-password').lean();
+    
+    // Add application context for recruiters
+    const enrichedStudents = await Promise.all(students.map(async (student) => {
       if (req.user.role === 'recruiter' && req.allowedStudents) {
-        // Add context about which internships the student applied to
         try {
-          const applicationsPath = path.join(__dirname, '../data/applications.json');
-          const internshipsPath = path.join(__dirname, '../data/internships.json');
-          const applications = JSON.parse(fs.readFileSync(applicationsPath, 'utf8'));
-          const internships = JSON.parse(fs.readFileSync(internshipsPath, 'utf8'));
+          const studentApplications = await Application.find({
+            studentId: student.id,
+            internshipId: { $in: req.recruiterInternships }
+          }).lean();
           
-          const studentApplications = applications.filter(app => 
-            app.studentId === student.id && req.recruiterInternships.includes(app.internshipId)
-          );
-          
-          student.applicationContext = studentApplications.map(app => {
-            const internship = internships.find(i => i.id === app.internshipId);
+          const applicationContext = await Promise.all(studentApplications.map(async (app) => {
+            const internship = await Internship.findOne({ id: app.internshipId }).select('title').lean();
             return {
               internshipId: app.internshipId,
               internshipTitle: internship?.title || 'Unknown',
               applicationStatus: app.status,
               appliedAt: app.appliedAt
             };
-          });
+          }));
+          
+          student.applicationContext = applicationContext;
         } catch (error) {
           console.error('Error adding application context:', error);
           student.applicationContext = [];
         }
       }
       return student;
-    });
+    }));
     
-    res.json({ students: filteredStudents, total: filteredStudents.length });
+    res.json({ students: enrichedStudents, total: enrichedStudents.length });
   } catch (error) {
+    console.error('Get students error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

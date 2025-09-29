@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { loadUsers } = require('../middleware/auth');
+const { Student, Admin, Mentor, Recruiter } = require('../models');
 const router = express.Router();
 
 // Login route
@@ -13,8 +13,21 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ error: 'Email and password are required' });
     }
     
-    const users = loadUsers();
-    const user = users.find(u => u.email === email && (!role || u.role === role));
+    let user = null;
+    
+    // Search in appropriate collection based on role or search all
+    if (role === 'student' || !role) {
+      user = await Student.findOne({ email }).lean();
+    }
+    if (!user && (role === 'admin' || !role)) {
+      user = await Admin.findOne({ email }).lean();
+    }
+    if (!user && (role === 'mentor' || !role)) {
+      user = await Mentor.findOne({ email }).lean();
+    }
+    if (!user && (role === 'recruiter' || !role)) {
+      user = await Recruiter.findOne({ email }).lean();
+    }
     
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });

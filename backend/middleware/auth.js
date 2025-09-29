@@ -1,49 +1,33 @@
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
+const { Student, Admin, Mentor, Recruiter, AdminAudit, Application, Internship } = require('../models');
 
 // Audit logging for admin actions
-const logAdminAction = (adminId, action, details = {}) => {
-  const logEntry = {
-    timestamp: new Date().toISOString(),
-    adminId,
-    action,
-    details
-  };
-  
+const logAdminAction = async (adminId, action, details = {}) => {
   try {
-    const logPath = path.join(__dirname, '../data/admin_audit.json');
-    let logs = [];
+    const auditCount = await AdminAudit.countDocuments();
+    const logEntry = new AdminAudit({
+      id: `AUDIT${String(auditCount + 1).padStart(3, '0')}`,
+      adminId,
+      action,
+      details,
+      timestamp: new Date()
+    });
     
-    if (fs.existsSync(logPath)) {
-      logs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
+    await logEntry.save();
+    
+    // Clean up old logs (keep last 1000)
+    const totalLogs = await AdminAudit.countDocuments();
+    if (totalLogs > 1000) {
+      const oldLogs = await AdminAudit.find().sort({ timestamp: 1 }).limit(totalLogs - 1000);
+      await AdminAudit.deleteMany({ _id: { $in: oldLogs.map(log => log._id) } });
     }
-    
-    logs.push(logEntry);
-    
-    // Keep only last 1000 log entries
-    if (logs.length > 1000) {
-      logs = logs.slice(-1000);
-    }
-    
-    fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
   } catch (error) {
     console.error('Failed to log admin action:', error);
   }
 };
 
-// Load all user data
-const loadUsers = () => {
-  const students = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/students.json'), 'utf8'));
-  const mentors = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/mentors.json'), 'utf8'));
-  const admins = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/admins.json'), 'utf8'));
-  const recruiters = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/recruiters.json'), 'utf8'));
-  
-  return [...students, ...mentors, ...admins, ...recruiters];
-};
-
 // Authentication middleware
-const authenticate = (req, res, next) => {
+const authenticate = async (req, res, next) => {
   const token = req.header('Authorization')?.replace('Bearer ', '');
   
   if (!token) {
@@ -52,8 +36,13 @@ const authenticate = (req, res, next) => {
   
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'campus-placement-secret');
-    const users = loadUsers();
-    const user = users.find(u => u.id === decoded.id && u.email === decoded.email);
+    
+    // Find user in appropriate collection
+    let user = null;
+    user = await Student.findOne({ id: decoded.id, email: decoded.email }).lean();
+    if (!user) user = await Admin.findOne({ id: decoded.id, email: decoded.email }).lean();
+    if (!user) user = await Mentor.findOne({ id: decoded.id, email: decoded.email }).lean();
+    if (!user) user = await Recruiter.findOne({ id: decoded.id, email: decoded.email }).lean();
     
     if (!user) {
       return res.status(401).json({ error: 'Invalid token.' });
