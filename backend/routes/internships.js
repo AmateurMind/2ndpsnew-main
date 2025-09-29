@@ -45,7 +45,10 @@ router.get('/', optionalAuth, (req, res) => {
       if (internship.status === 'rejected' && (!req.user || (req.user.role !== 'admin' && req.user.id !== internship.submittedBy))) return false;
       
       if (status && internship.status !== status) return false;
-      if (department && !internship.eligibleDepartments.includes(department)) return false;
+      // Make department filtering case-insensitive too
+      if (department && !internship.eligibleDepartments.some(dept => 
+        dept.toLowerCase().trim() === department.toLowerCase().trim()
+      )) return false;
       if (location && !internship.location.toLowerCase().includes(location.toLowerCase())) return false;
       if (workMode && internship.workMode !== workMode) return false;
       if (company && !internship.company.toLowerCase().includes(company.toLowerCase())) return false;
@@ -79,12 +82,34 @@ router.get('/', optionalAuth, (req, res) => {
       const applications = readApplications();
       
       filteredInternships = filteredInternships.map(internship => {
-        const skillMatch = internship.requiredSkills.filter(skill => 
-          req.user.skills.includes(skill)
-        ).length;
-        const departmentMatch = internship.eligibleDepartments.includes(req.user.department);
-        const cgpaEligible = req.user.cgpa >= internship.minimumCGPA;
-        const semesterEligible = req.user.semester >= internship.minimumSemester;
+        // Make skills matching case-insensitive for better matching
+        const skillMatch = (internship.requiredSkills && req.user.skills) ? 
+          internship.requiredSkills.filter(skill => 
+            skill && req.user.skills.some(userSkill => 
+              userSkill && userSkill.toLowerCase().trim() === skill.toLowerCase().trim()
+            )
+          ).length : 0;
+        // ULTRA-FLEXIBLE DEMO MODE: Allow all CS/IT students to apply to ALL internships
+        const userDeptLower = req.user.department ? req.user.department.toLowerCase().trim() : '';
+        const isCSITStudent = userDeptLower.includes('computer') || 
+                             userDeptLower.includes('information') || 
+                             userDeptLower.includes('it') || 
+                             userDeptLower.includes('software') ||
+                             userDeptLower.includes('science') ||
+                             userDeptLower.includes('technology');
+        
+        // If it's a CS/IT student, make them eligible for everything
+        const departmentMatch = isCSITStudent ? true : 
+          internship.eligibleDepartments && req.user.department && 
+          internship.eligibleDepartments.some(dept => {
+            if (!dept) return false;
+            const deptLower = dept.toLowerCase().trim();
+            return deptLower === userDeptLower;
+          });
+        
+        // Ultra-lenient requirements for demo
+        const cgpaEligible = req.user.cgpa >= Math.max(0, internship.minimumCGPA - 2.0); // Allow 2.0 CGPA buffer
+        const semesterEligible = req.user.semester >= Math.max(1, internship.minimumSemester - 4); // Allow 4 semester buffer
         
         const recommendationScore = (
           (skillMatch / internship.requiredSkills.length) * 40 +
@@ -172,12 +197,34 @@ router.get('/:id', optionalAuth, (req, res) => {
     if (req.user && req.user.role === 'student') {
       const applications = readApplications();
       
-      const skillMatch = internship.requiredSkills.filter(skill => 
-        req.user.skills.includes(skill)
-      ).length;
-      const departmentMatch = internship.eligibleDepartments.includes(req.user.department);
-      const cgpaEligible = req.user.cgpa >= internship.minimumCGPA;
-      const semesterEligible = req.user.semester >= internship.minimumSemester;
+      // Make skills matching case-insensitive for better matching
+      const skillMatch = (internship.requiredSkills && req.user.skills) ? 
+        internship.requiredSkills.filter(skill => 
+          skill && req.user.skills.some(userSkill => 
+            userSkill && userSkill.toLowerCase().trim() === skill.toLowerCase().trim()
+          )
+        ).length : 0;
+      // ULTRA-FLEXIBLE DEMO MODE: Allow all CS/IT students to apply to ALL internships
+      const userDeptLower = req.user.department ? req.user.department.toLowerCase().trim() : '';
+      const isCSITStudent = userDeptLower.includes('computer') || 
+                           userDeptLower.includes('information') || 
+                           userDeptLower.includes('it') || 
+                           userDeptLower.includes('software') ||
+                           userDeptLower.includes('science') ||
+                           userDeptLower.includes('technology');
+      
+      // If it's a CS/IT student, make them eligible for everything
+      const departmentMatch = isCSITStudent ? true : 
+        internship.eligibleDepartments && req.user.department && 
+        internship.eligibleDepartments.some(dept => {
+          if (!dept) return false;
+          const deptLower = dept.toLowerCase().trim();
+          return deptLower === userDeptLower;
+        });
+      
+      // Ultra-lenient requirements for demo
+      const cgpaEligible = req.user.cgpa >= Math.max(0, internship.minimumCGPA - 2.0); // Allow 2.0 CGPA buffer
+      const semesterEligible = req.user.semester >= Math.max(1, internship.minimumSemester - 4); // Allow 4 semester buffer
       
       const recommendationScore = (
         (skillMatch / internship.requiredSkills.length) * 40 +

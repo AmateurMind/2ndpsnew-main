@@ -3,7 +3,7 @@
     "id": "INT001",
     "title": "Frontend Development Intern",
     "company": "TechCorp Solutions",
-    "companyLogo": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100",
+    "companyLogo": "https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=100",
     "description": "Work on cutting-edge React applications with our frontend team. You'll be involved in building responsive user interfaces and implementing modern web technologies.",
     "requiredSkills": [
       "JavaScript",
@@ -30,7 +30,7 @@
     "applicationDeadline": "2024-04-15T23:59:59.000Z",
     "startDate": "2024-05-01T00:00:00.000Z",
     "maxApplications": 50,
-    "currentApplications": 23,
+    "currentApplications": 24,
     "status": "active",
     "companyDescription": "A leading technology company specializing in web development and digital solutions.",
     "requirements": [
@@ -119,7 +119,7 @@
     "id": "INT003",
     "title": "Mobile App Development Intern",
     "company": "AppCraft Studios",
-    "companyLogo": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=100",
+    "companyLogo": "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=100",
     "description": "Develop mobile applications for Android and iOS platforms. Work with cross-platform technologies and learn modern mobile development practices.",
     "requiredSkills": [
       "Java",
@@ -143,7 +143,7 @@
     "duration": "4 months",
     "location": "Pune",
     "workMode": "On-site",
-    "applicationDeadline": "2024-04-25T23:59:59.000Z",
+    "applicationDeadline": "2024-04-25T00:00:00.000Z",
     "startDate": "2024-05-10T00:00:00.000Z",
     "maxApplications": 40,
     "currentApplications": 32,
@@ -170,13 +170,14 @@
     "approvedAt": "2024-03-08T00:00:00.000Z",
     "adminNotes": "",
     "recruiterNotes": "",
-    "rejectionReason": ""
+    "rejectionReason": "",
+    "updatedAt": "2025-09-29T06:46:44.006Z"
   },
   {
     "id": "INT004",
     "title": "IoT Development Intern",
     "company": "SmartTech Solutions",
-    "companyLogo": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100",
+    "companyLogo": "https://images.unsplash.com/photo-1713857297379-6fc26e70f581?w=100",
     "description": "Work on Internet of Things (IoT) projects involving hardware and software integration. Perfect for electronics and computer science students.",
     "requiredSkills": [
       "C++",
@@ -202,7 +203,7 @@
     "duration": "5 months",
     "location": "Hyderabad",
     "workMode": "On-site",
-    "applicationDeadline": "2024-04-18T23:59:59.000Z",
+    "applicationDeadline": "2024-04-18T00:00:00.000Z",
     "startDate": "2024-05-05T00:00:00.000Z",
     "maxApplications": 25,
     "currentApplications": 15,
@@ -229,7 +230,8 @@
     "approvedAt": "2024-03-10T00:00:00.000Z",
     "adminNotes": "",
     "recruiterNotes": "",
-    "rejectionReason": ""
+    "rejectionReason": "",
+    "updatedAt": "2025-09-29T06:52:08.314Z"
   },
   {
     "id": "INT005",
@@ -291,52 +293,10 @@
     "rejectionReason": ""
   },
   {
-    "id": "INT006",
-    "title": "abc",
-    "company": "ac",
-    "companyLogo": "asd",
-    "description": "asdsa",
-    "requiredSkills": [
-      "Python"
-    ],
-    "preferredSkills": [
-      "assembly"
-    ],
-    "eligibleDepartments": [
-      "Electronics",
-      "Computer Science",
-      "Information Technology"
-    ],
-    "minimumSemester": 4,
-    "minimumCGPA": 6,
-    "stipend": "20000",
-    "duration": "3 Months",
-    "location": "Delhi",
-    "workMode": "On-site",
-    "applicationDeadline": "2025-10-11T00:00:00.000Z",
-    "startDate": "2025-09-28T00:00:00.000Z",
-    "maxApplications": 50,
-    "currentApplications": 1,
-    "status": "active",
-    "companyDescription": "",
-    "requirements": [],
-    "benefits": [],
-    "createdAt": "2025-09-28T16:53:09.552Z",
-    "postedBy": "ADM001",
-    "updatedAt": "2025-09-28T16:55:33.977Z",
-    "submittedBy": null,
-    "approvedBy": "ADM001",
-    "submittedAt": null,
-    "approvedAt": "2025-09-28T16:55:33.977Z",
-    "adminNotes": "",
-    "recruiterNotes": "",
-    "rejectionReason": ""
-  },
-  {
     "id": "INT007",
     "title": "Full Stack Development Intern",
     "company": "TechCorp Solutions",
-    "companyLogo": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100",
+    "companyLogo": "https://images.unsplash.com/photo-1709547228697-fa1f424a3f39?w=100",
     "description": "Join our dynamic team to work on cutting-edge web applications using modern tech stack. You'll contribute to both frontend and backend development while learning industry best practices.",
     "requiredSkills": [
       "JavaScript",
@@ -361,7 +321,7 @@
     "duration": "6 months",
     "location": "Bangalore",
     "workMode": "Hybrid",
-    "applicationDeadline": "2024-12-15T23:59:59.000Z",
+    "applicationDeadline": "2024-12-15T00:00:00.000Z",
     "startDate": "2025-01-15T00:00:00.000Z",
     "maxApplications": 40,
     "currentApplications": 12,
@@ -390,13 +350,14 @@
     "approvedAt": "2024-11-01T09:00:00.000Z",
     "adminNotes": "Approved - good opportunity for students",
     "recruiterNotes": "Looking for talented developers to join our team",
-    "rejectionReason": ""
+    "rejectionReason": "",
+    "updatedAt": "2025-09-29T06:49:27.465Z"
   },
   {
     "id": "INT008",
     "title": "Data Analytics Intern",
     "company": "DataTech Analytics",
-    "companyLogo": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100",
+    "companyLogo": "https://images.unsplash.com/photo-1623524643836-cda81843d707?w=100",
     "description": "Work with our data science team on real-world analytics projects. Gain hands-on experience with data visualization, statistical analysis, and machine learning implementations.",
     "requiredSkills": [
       "Python",
@@ -424,7 +385,7 @@
     "duration": "5 months",
     "location": "Mumbai",
     "workMode": "Remote",
-    "applicationDeadline": "2024-12-20T23:59:59.000Z",
+    "applicationDeadline": "2024-12-20T00:00:00.000Z",
     "startDate": "2025-01-10T00:00:00.000Z",
     "maxApplications": 25,
     "currentApplications": 8,
@@ -453,13 +414,14 @@
     "approvedAt": "2024-11-02T10:30:00.000Z",
     "adminNotes": "Approved - good analytics opportunity",
     "recruiterNotes": "Seeking data-driven students for analytics team",
-    "rejectionReason": ""
+    "rejectionReason": "",
+    "updatedAt": "2025-09-29T06:45:31.446Z"
   },
   {
     "id": "INT009",
     "title": "Hardware Engineering Intern",
     "company": "SmartTech Solutions",
-    "companyLogo": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100",
+    "companyLogo": "https://images.unsplash.com/photo-1755290726859-f8d02df5afbd?w=100",
     "description": "Join our hardware team to work on innovative IoT devices and embedded systems. Perfect opportunity for electronics and computer engineering students to gain practical experience.",
     "requiredSkills": [
       "Circuit Design",
@@ -486,7 +448,7 @@
     "duration": "6 months",
     "location": "Hyderabad",
     "workMode": "On-site",
-    "applicationDeadline": "2024-12-10T23:59:59.000Z",
+    "applicationDeadline": "2024-12-10T00:00:00.000Z",
     "startDate": "2025-01-20T00:00:00.000Z",
     "maxApplications": 20,
     "currentApplications": 5,
@@ -515,13 +477,14 @@
     "approvedAt": "2024-11-03T14:15:00.000Z",
     "adminNotes": "Approved - excellent hardware opportunity",
     "recruiterNotes": "Looking for hardware-focused engineering students",
-    "rejectionReason": ""
+    "rejectionReason": "",
+    "updatedAt": "2025-09-29T06:53:24.972Z"
   },
   {
     "id": "INT010",
     "title": "Digital Marketing Intern",
     "company": "TechCorp Solutions",
-    "companyLogo": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100",
+    "companyLogo": "https://images.unsplash.com/photo-1557838923-2985c318be48?w=100",
     "description": "Support our marketing team in digital campaigns, content creation, and social media management. Learn modern marketing techniques and analytics tools.",
     "requiredSkills": [
       "Content Writing",
@@ -549,7 +512,7 @@
     "duration": "4 months",
     "location": "Bangalore",
     "workMode": "Hybrid",
-    "applicationDeadline": "2024-12-25T23:59:59.000Z",
+    "applicationDeadline": "2024-12-25T00:00:00.000Z",
     "startDate": "2025-02-01T00:00:00.000Z",
     "maxApplications": 30,
     "currentApplications": 15,
@@ -578,13 +541,14 @@
     "approvedAt": "2024-11-04T11:20:00.000Z",
     "adminNotes": "Approved - marketing opportunity",
     "recruiterNotes": "Need creative students for marketing initiatives",
-    "rejectionReason": ""
+    "rejectionReason": "",
+    "updatedAt": "2025-09-29T06:44:08.254Z"
   },
   {
     "id": "INT011",
     "title": "Mobile App Development Intern",
     "company": "DataTech Analytics",
-    "companyLogo": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100",
+    "companyLogo": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=100",
     "description": "Develop mobile applications for our analytics platform. Work with React Native and native development while learning mobile-first design principles.",
     "requiredSkills": [
       "React Native",
@@ -610,7 +574,7 @@
     "duration": "5 months",
     "location": "Mumbai",
     "workMode": "Hybrid",
-    "applicationDeadline": "2024-12-18T23:59:59.000Z",
+    "applicationDeadline": "2024-12-18T00:00:00.000Z",
     "startDate": "2025-01-25T00:00:00.000Z",
     "maxApplications": 35,
     "currentApplications": 18,
@@ -639,13 +603,14 @@
     "approvedAt": "2024-11-05T16:45:00.000Z",
     "adminNotes": "Approved - mobile development opportunity",
     "recruiterNotes": "Seeking mobile developers for analytics platform",
-    "rejectionReason": ""
+    "rejectionReason": "",
+    "updatedAt": "2025-09-29T06:46:07.519Z"
   },
   {
     "id": "INT012",
     "title": "Cloud Infrastructure Intern",
     "company": "SmartTech Solutions",
-    "companyLogo": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=100",
+    "companyLogo": "https://images.unsplash.com/photo-1667984390538-3dea7a3fe33d?w=100",
     "description": "Work with our DevOps team to manage cloud infrastructure, deployment pipelines, and monitoring systems. Perfect for students interested in cloud computing and automation.",
     "requiredSkills": [
       "Linux",
@@ -672,10 +637,10 @@
     "duration": "6 months",
     "location": "Hyderabad",
     "workMode": "On-site",
-    "applicationDeadline": "2024-12-12T23:59:59.000Z",
+    "applicationDeadline": "2024-12-12T00:00:00.000Z",
     "startDate": "2025-01-08T00:00:00.000Z",
     "maxApplications": 15,
-    "currentApplications": 7,
+    "currentApplications": 8,
     "status": "active",
     "companyDescription": "Learn cloud-native technologies and DevOps practices while working on real production infrastructure that serves thousands of IoT devices.",
     "requirements": [
@@ -701,7 +666,8 @@
     "approvedAt": "2024-11-06T13:30:00.000Z",
     "adminNotes": "Approved - cloud infrastructure opportunity",
     "recruiterNotes": "Need DevOps-focused students for cloud team",
-    "rejectionReason": ""
+    "rejectionReason": "",
+    "updatedAt": "2025-09-29T06:54:46.648Z"
   },
   {
     "id": "INT013",
@@ -740,6 +706,6 @@
     "adminNotes": "",
     "recruiterNotes": "",
     "rejectionReason": "",
-    "updatedAt": "2025-09-29T06:16:13.839Z"
+    "updatedAt": "2025-09-29T06:29:47.114Z"
   }
 ]
