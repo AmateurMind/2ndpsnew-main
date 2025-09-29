@@ -11,7 +11,8 @@ import {
   Settings,
   LogOut,
   Menu,
-  X
+  X,
+  Brain
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -44,6 +45,7 @@ const Navbar = () => {
         { path: '/student/dashboard', label: 'Dashboard', icon: BarChart3 },
         { path: '/student/internships', label: 'Internships', icon: BookOpen },
         { path: '/student/applications', label: 'Applications', icon: FileText },
+        { path: '/student/ai-tools', label: 'AI Tools', icon: Brain },
         { path: '/student/profile', label: 'Profile', icon: User },
       ],
       mentor: [

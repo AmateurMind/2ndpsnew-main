@@ -15,11 +15,16 @@ import {
   Building
 } from 'lucide-react';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import ResumeAnalyzer from '../../components/ResumeAnalyzer';
+import CareerGuidance from '../../components/CareerGuidance';
+import SkillsGapAnalysis from '../../components/SkillsGapAnalysis';
 import axios from 'axios';
 
 const StudentDashboard = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [activeAITab, setActiveAITab] = useState('resume');
+  const [showAISection, setShowAISection] = useState(false);
   const [dashboardData, setDashboardData] = useState({
     applications: [],
     recommendedInternships: [],
@@ -198,6 +203,123 @@ const StudentDashboard = () => {
         </div>
       </div>
 
+      {/* AI-Powered Tools Section */}
+      <div className="mb-8" data-ai-section>
+        <div className="card p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold text-gray-900">🤖 AI-Powered Career Tools</h2>
+            <button
+              onClick={() => setShowAISection(!showAISection)}
+              className="text-primary-600 hover:text-primary-700 text-sm font-medium"
+            >
+              {showAISection ? 'Hide AI Tools' : 'Show AI Tools'}
+            </button>
+          </div>
+          
+          {!showAISection ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-purple-50 rounded-lg p-4 text-center">
+                <div className="text-purple-600 text-2xl mb-2">📊</div>
+                <h3 className="font-semibold text-gray-900 mb-2">Resume Analysis</h3>
+                <p className="text-sm text-gray-600 mb-3">Get AI-powered feedback on your resume with improvement suggestions</p>
+                <button
+                  onClick={() => {
+                    setShowAISection(true);
+                    setActiveAITab('resume');
+                  }}
+                  className="text-purple-600 hover:text-purple-700 text-sm font-medium"
+                >
+                  Try Resume Analysis →
+                </button>
+              </div>
+              
+              <div className="bg-indigo-50 rounded-lg p-4 text-center">
+                <div className="text-indigo-600 text-2xl mb-2">🧭</div>
+                <h3 className="font-semibold text-gray-900 mb-2">Career Guidance</h3>
+                <p className="text-sm text-gray-600 mb-3">Receive personalized career recommendations based on your profile</p>
+                <button
+                  onClick={() => {
+                    setShowAISection(true);
+                    setActiveAITab('career');
+                  }}
+                  className="text-indigo-600 hover:text-indigo-700 text-sm font-medium"
+                >
+                  Get Career Guidance →
+                </button>
+              </div>
+              
+              <div className="bg-green-50 rounded-lg p-4 text-center">
+                <div className="text-green-600 text-2xl mb-2">🎯</div>
+                <h3 className="font-semibold text-gray-900 mb-2">Skills Gap Analysis</h3>
+                <p className="text-sm text-gray-600 mb-3">Discover which skills you need for your target career</p>
+                <button
+                  onClick={() => {
+                    setShowAISection(true);
+                    setActiveAITab('skills');
+                  }}
+                  className="text-green-600 hover:text-green-700 text-sm font-medium"
+                >
+                  Analyze Skills Gap →
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              {/* AI Tools Tabs */}
+              <div className="flex space-x-1 mb-6 bg-gray-100 rounded-lg p-1">
+                <button
+                  onClick={() => setActiveAITab('resume')}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                    activeAITab === 'resume'
+                      ? 'bg-white text-purple-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  📊 Resume Analysis
+                </button>
+                <button
+                  onClick={() => setActiveAITab('career')}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                    activeAITab === 'career'
+                      ? 'bg-white text-indigo-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  🧭 Career Guidance
+                </button>
+                <button
+                  onClick={() => setActiveAITab('skills')}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                    activeAITab === 'skills'
+                      ? 'bg-white text-green-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  🎯 Skills Analysis
+                </button>
+              </div>
+              
+              {/* AI Tool Content */}
+              <div className="min-h-[400px]">
+                {activeAITab === 'resume' && (
+                  <ResumeAnalyzer className="border-0 shadow-none p-0" />
+                )}
+                {activeAITab === 'career' && (
+                  <CareerGuidance className="border-0 shadow-none p-0" />
+                )}
+                {activeAITab === 'skills' && (
+                  <SkillsGapAnalysis 
+                    currentSkills={user.skills || []} 
+                    targetRole={user.targetRole || ''}
+                    className="border-0 shadow-none p-0" 
+                  />
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Recent Applications */}
         <div className="lg:col-span-2">
@@ -282,6 +404,16 @@ const StudentDashboard = () => {
                 <FileText className="h-4 w-4 mr-2" />
                 My Applications
               </Link>
+              <button
+                onClick={() => {
+                  setShowAISection(true);
+                  // Scroll to AI section
+                  document.querySelector('[data-ai-section]')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-colors flex items-center justify-center"
+              >
+                🤖 AI Career Tools
+              </button>
               {user.isPlaced && (
                 <div className="bg-green-50 rounded-lg p-3 text-center">
                   <p className="text-sm text-green-800 font-medium">

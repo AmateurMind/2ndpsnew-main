@@ -10,6 +10,7 @@ import StudentDashboard from './pages/student/StudentDashboard';
 import StudentProfile from './pages/student/StudentProfile';
 import StudentInternships from './pages/student/StudentInternships';
 import StudentApplications from './pages/student/StudentApplications';
+import StudentAITools from './pages/student/StudentAITools';
 import MentorDashboard from './pages/mentor/MentorDashboard';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminInternships from './pages/admin/AdminInternships';
@@ -103,6 +104,10 @@ function AppContent() {
           <Route 
             path="/student/applications" 
             element={<ProtectedRoute role="student"><StudentApplications /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/student/ai-tools" 
+            element={<ProtectedRoute role="student"><StudentAITools /></ProtectedRoute>} 
           />
           
           {/* Mentor Routes */}
