@@ -63,7 +63,10 @@ const RecruiterStudents = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-secondary-900">Students</h1>
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-secondary-900">Student Applicants</h1>
+          <p className="text-secondary-600 mt-1">Students who have applied to your internship postings</p>
+        </div>
       </div>
 
       <div className="card p-4 mb-6">
@@ -99,6 +102,12 @@ const RecruiterStudents = () => {
 
       {loading ? (
         <div className="min-h-[40vh] flex items-center justify-center"><LoadingSpinner size="large" /></div>
+      ) : visibleStudents.length === 0 ? (
+        <div className="card p-8 text-center">
+          <GraduationCap className="h-12 w-12 text-secondary-400 mx-auto mb-4" />
+          <h3 className="text-lg font-semibold text-secondary-900 mb-2">No applicants yet</h3>
+          <p className="text-secondary-600">Students who apply to your internship postings will appear here</p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {visibleStudents.map(s => (
@@ -121,6 +130,18 @@ const RecruiterStudents = () => {
                   <span key={skill} className="px-2 py-0.5 bg-secondary-100 text-secondary-700 rounded-full text-xs">{skill}</span>
                 ))}
               </div>
+              {Array.isArray(s.applicationContext) && s.applicationContext.length > 0 && (
+                <div className="mt-3">
+                  <div className="text-xs text-secondary-600 mb-1">Applied to your postings:</div>
+                  <div className="flex flex-wrap gap-1">
+                    {s.applicationContext.map(ctx => (
+                      <span key={ctx.internshipId} className="px-2 py-0.5 bg-primary-50 text-primary-700 rounded-full text-xs">
+                        {ctx.internshipTitle} • {ctx.applicationStatus}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="mt-3 flex items-center gap-2">
                 <button onClick={()=>toggleShortlist(s.id)} className="btn-outline text-sm flex items-center">
 {shortlist.includes(s.id) ? <CheckCircle2 className="h-4 w-4 mr-1" /> : <Bookmark className="h-4 w-4 mr-1" />}

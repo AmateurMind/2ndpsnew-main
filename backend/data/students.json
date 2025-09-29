@@ -19,7 +19,7 @@
     "phone": "+91-9876543210",
     "address": "123 College Street, Delhi",
     "dateOfBirth": "2002-03-15",
-    "profilePicture": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "profilePicture": "https://images.unsplash.com/flagged/photo-1576667815744-ca5c641c5ef5?q=80&w=150&h=150&auto=format&fit=crop&crop=faces&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA",
     "projects": [
       {
         "title": "E-commerce Website",
@@ -61,7 +61,7 @@
     "phone": "+91-9876543211",
     "address": "456 Tech Avenue, Mumbai",
     "dateOfBirth": "2002-07-22",
-    "profilePicture": "https://images.unsplash.com/photo-1494790108755-2616b612b641?w=150",
+    "profilePicture": "https://images.unsplash.com/photo-1663229047939-5bc89f1f1344?q=80&w=1170&h=760&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "projects": [
       {
         "title": "Hospital Management System",

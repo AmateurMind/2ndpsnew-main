@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticate, authorize, verifyInternshipOwnership } = require('../middleware/auth');
 const router = express.Router();
 
 // Helper functions to read data files
@@ -214,6 +214,121 @@ function getSkillsDemand(internships) {
     .sort(([,a], [,b]) => b - a)
     .slice(0, 10)
     .map(([skill, demand]) => ({ skill, demand }));
+}
+
+// Recruiter analytics (limited to their own internships)
+router.get('/recruiter', authenticate, authorize('recruiter'), (req, res) => {
+  try {
+    const applications = readApplications();
+    const internships = readInternships();
+    const students = readStudents();
+    
+    // Get only recruiter's internships
+    const recruiterInternships = internships.filter(
+      i => i.postedBy === req.user.id || i.submittedBy === req.user.id
+    );
+    
+    const recruiterInternshipIds = recruiterInternships.map(i => i.id);
+    
+    // Filter applications to only those for recruiter's internships
+    const recruiterApplications = applications.filter(
+      app => recruiterInternshipIds.includes(app.internshipId)
+    );
+    
+    // Basic counts
+    const totalInternships = recruiterInternships.length;
+    const activeInternships = recruiterInternships.filter(i => i.status === 'active').length;
+    const pendingInternships = recruiterInternships.filter(i => i.status === 'submitted').length;
+    const totalApplications = recruiterApplications.length;
+    
+    // Application status breakdown
+    const applicationsByStatus = {
+      applied: 0,
+      pending_mentor_approval: 0,
+      approved: 0,
+      rejected: 0,
+      interview_scheduled: 0,
+      interview_completed: 0,
+      offered: 0,
+      accepted: 0
+    };
+    
+    recruiterApplications.forEach(app => {
+      applicationsByStatus[app.status] = (applicationsByStatus[app.status] || 0) + 1;
+    });
+    
+    // Applications per internship
+    const applicationsByInternship = recruiterInternships.map(internship => {
+      const internshipApps = recruiterApplications.filter(app => app.internshipId === internship.id);
+      return {
+        internshipId: internship.id,
+        title: internship.title,
+        totalApplications: internshipApps.length,
+        approvedApplications: internshipApps.filter(app => app.status === 'approved').length,
+        rejectedApplications: internshipApps.filter(app => app.status === 'rejected').length
+      };
+    });
+    
+    // Recent activities (last 10 applications to recruiter's internships)
+    const recentActivities = recruiterApplications
+      .sort((a, b) => new Date(b.appliedAt) - new Date(a.appliedAt))
+      .slice(0, 10)
+      .map(app => {
+        const student = students.find(s => s.id === app.studentId);
+        const internship = internships.find(i => i.id === app.internshipId);
+        return {
+          id: app.id,
+          student: student?.name || 'Unknown',
+          internship: internship?.title || 'Unknown',
+          status: app.status,
+          appliedAt: app.appliedAt
+        };
+      });
+    
+    // Performance metrics
+    const performanceMetrics = {
+      averageApplicationsPerInternship: totalInternships > 0 ? Math.round(totalApplications / totalInternships) : 0,
+      approvalRate: totalApplications > 0 ? Math.round((applicationsByStatus.approved / totalApplications) * 100) : 0,
+      responseTime: calculateAverageResponseTime(recruiterApplications)
+    };
+    
+    const analytics = {
+      overview: {
+        totalInternships,
+        activeInternships,
+        pendingInternships,
+        totalApplications
+      },
+      applicationsByStatus,
+      applicationsByInternship,
+      recentActivities,
+      performanceMetrics,
+      monthlyTrends: getMonthlyTrends(recruiterApplications)
+    };
+    
+    res.json(analytics);
+  } catch (error) {
+    console.error('Recruiter analytics error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Helper function to calculate average response time
+function calculateAverageResponseTime(applications) {
+  const processedApplications = applications.filter(
+    app => app.status !== 'applied' && app.processedAt
+  );
+  
+  if (processedApplications.length === 0) return 0;
+  
+  const totalResponseTime = processedApplications.reduce((sum, app) => {
+    const applied = new Date(app.appliedAt);
+    const processed = new Date(app.processedAt);
+    return sum + (processed - applied);
+  }, 0);
+  
+  // Return average response time in hours
+  return Math.round((totalResponseTime / processedApplications.length) / (1000 * 60 * 60));
 }
 
 module.exports = router;

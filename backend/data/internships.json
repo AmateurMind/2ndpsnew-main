@@ -46,7 +46,15 @@
       "Potential for full-time offer"
     ],
     "createdAt": "2024-03-01T00:00:00.000Z",
-    "postedBy": "ADM001"
+    "postedBy": "ADM001",
+    "postedByRole": "admin",
+    "submittedBy": null,
+    "approvedBy": "ADM001",
+    "submittedAt": null,
+    "approvedAt": "2024-03-01T00:00:00.000Z",
+    "adminNotes": "",
+    "recruiterNotes": "",
+    "rejectionReason": ""
   },
   {
     "id": "INT002",
@@ -97,7 +105,15 @@
       "Networking opportunities"
     ],
     "createdAt": "2024-03-05T00:00:00.000Z",
-    "postedBy": "ADM001"
+    "postedBy": "ADM001",
+    "postedByRole": "admin",
+    "submittedBy": null,
+    "approvedBy": "ADM001",
+    "submittedAt": null,
+    "approvedAt": "2024-03-05T00:00:00.000Z",
+    "adminNotes": "",
+    "recruiterNotes": "",
+    "rejectionReason": ""
   },
   {
     "id": "INT003",
@@ -146,7 +162,15 @@
       "Flexible internship hours"
     ],
     "createdAt": "2024-03-08T00:00:00.000Z",
-    "postedBy": "ADM001"
+    "postedBy": "ADM001",
+    "postedByRole": "admin",
+    "submittedBy": null,
+    "approvedBy": "ADM001",
+    "submittedAt": null,
+    "approvedAt": "2024-03-08T00:00:00.000Z",
+    "adminNotes": "",
+    "recruiterNotes": "",
+    "rejectionReason": ""
   },
   {
     "id": "INT004",
@@ -197,7 +221,15 @@
       "Full-time placement opportunities"
     ],
     "createdAt": "2024-03-10T00:00:00.000Z",
-    "postedBy": "ADM001"
+    "postedBy": "ADM001",
+    "postedByRole": "admin",
+    "submittedBy": null,
+    "approvedBy": "ADM001",
+    "submittedAt": null,
+    "approvedAt": "2024-03-10T00:00:00.000Z",
+    "adminNotes": "",
+    "recruiterNotes": "",
+    "rejectionReason": ""
   },
   {
     "id": "INT005",
@@ -248,7 +280,15 @@
       "Performance bonus potential"
     ],
     "createdAt": "2024-02-28T00:00:00.000Z",
-    "postedBy": "ADM001"
+    "postedBy": "ADM001",
+    "postedByRole": "admin",
+    "submittedBy": null,
+    "approvedBy": "ADM001",
+    "submittedAt": null,
+    "approvedAt": "2024-02-28T00:00:00.000Z",
+    "adminNotes": "",
+    "recruiterNotes": "",
+    "rejectionReason": ""
   },
   {
     "id": "INT006",
@@ -283,7 +323,14 @@
     "benefits": [],
     "createdAt": "2025-09-28T16:53:09.552Z",
     "postedBy": "ADM001",
-    "updatedAt": "2025-09-28T16:55:33.977Z"
+    "updatedAt": "2025-09-28T16:55:33.977Z",
+    "submittedBy": null,
+    "approvedBy": "ADM001",
+    "submittedAt": null,
+    "approvedAt": "2025-09-28T16:55:33.977Z",
+    "adminNotes": "",
+    "recruiterNotes": "",
+    "rejectionReason": ""
   },
   {
     "id": "INT007",
@@ -336,7 +383,14 @@
     ],
     "createdAt": "2024-11-01T09:00:00.000Z",
     "postedBy": "REC001",
-    "postedByRole": "recruiter"
+    "postedByRole": "recruiter",
+    "submittedBy": "REC001",
+    "approvedBy": "ADM001",
+    "submittedAt": "2024-11-01T08:00:00.000Z",
+    "approvedAt": "2024-11-01T09:00:00.000Z",
+    "adminNotes": "Approved - good opportunity for students",
+    "recruiterNotes": "Looking for talented developers to join our team",
+    "rejectionReason": ""
   },
   {
     "id": "INT008",
@@ -392,7 +446,14 @@
     ],
     "createdAt": "2024-11-02T10:30:00.000Z",
     "postedBy": "REC002",
-    "postedByRole": "recruiter"
+    "postedByRole": "recruiter",
+    "submittedBy": "REC002",
+    "approvedBy": "ADM001",
+    "submittedAt": "2024-11-02T09:30:00.000Z",
+    "approvedAt": "2024-11-02T10:30:00.000Z",
+    "adminNotes": "Approved - good analytics opportunity",
+    "recruiterNotes": "Seeking data-driven students for analytics team",
+    "rejectionReason": ""
   },
   {
     "id": "INT009",
@@ -447,7 +508,14 @@
     ],
     "createdAt": "2024-11-03T14:15:00.000Z",
     "postedBy": "REC003",
-    "postedByRole": "recruiter"
+    "postedByRole": "recruiter",
+    "submittedBy": "REC003",
+    "approvedBy": "ADM001",
+    "submittedAt": "2024-11-03T13:15:00.000Z",
+    "approvedAt": "2024-11-03T14:15:00.000Z",
+    "adminNotes": "Approved - excellent hardware opportunity",
+    "recruiterNotes": "Looking for hardware-focused engineering students",
+    "rejectionReason": ""
   },
   {
     "id": "INT010",
@@ -503,7 +571,14 @@
     ],
     "createdAt": "2024-11-04T11:20:00.000Z",
     "postedBy": "REC001",
-    "postedByRole": "recruiter"
+    "postedByRole": "recruiter",
+    "submittedBy": "REC001",
+    "approvedBy": "ADM001",
+    "submittedAt": "2024-11-04T10:20:00.000Z",
+    "approvedAt": "2024-11-04T11:20:00.000Z",
+    "adminNotes": "Approved - marketing opportunity",
+    "recruiterNotes": "Need creative students for marketing initiatives",
+    "rejectionReason": ""
   },
   {
     "id": "INT011",
@@ -557,7 +632,14 @@
     ],
     "createdAt": "2024-11-05T16:45:00.000Z",
     "postedBy": "REC002",
-    "postedByRole": "recruiter"
+    "postedByRole": "recruiter",
+    "submittedBy": "REC002",
+    "approvedBy": "ADM001",
+    "submittedAt": "2024-11-05T15:45:00.000Z",
+    "approvedAt": "2024-11-05T16:45:00.000Z",
+    "adminNotes": "Approved - mobile development opportunity",
+    "recruiterNotes": "Seeking mobile developers for analytics platform",
+    "rejectionReason": ""
   },
   {
     "id": "INT012",
@@ -612,6 +694,52 @@
     ],
     "createdAt": "2024-11-06T13:30:00.000Z",
     "postedBy": "REC003",
-    "postedByRole": "recruiter"
+    "postedByRole": "recruiter",
+    "submittedBy": "REC003",
+    "approvedBy": "ADM001",
+    "submittedAt": "2024-11-06T12:30:00.000Z",
+    "approvedAt": "2024-11-06T13:30:00.000Z",
+    "adminNotes": "Approved - cloud infrastructure opportunity",
+    "recruiterNotes": "Need DevOps-focused students for cloud team",
+    "rejectionReason": ""
+  },
+  {
+    "id": "INT013",
+    "title": "Frontend",
+    "company": "TechCorp Solutions",
+    "companyLogo": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100",
+    "description": "Frontend desc",
+    "requiredSkills": [
+      "React"
+    ],
+    "preferredSkills": [],
+    "eligibleDepartments": [
+      "IT"
+    ],
+    "minimumSemester": 4,
+    "minimumCGPA": 6,
+    "stipend": "20000/month",
+    "duration": "2 months",
+    "location": "Bangalore",
+    "workMode": "On-site",
+    "applicationDeadline": "2025-09-30T00:00:00.000Z",
+    "startDate": "2025-10-04T00:00:00.000Z",
+    "maxApplications": 50,
+    "currentApplications": 0,
+    "status": "active",
+    "companyDescription": "companyyy",
+    "requirements": [],
+    "benefits": [],
+    "createdAt": "2025-09-29T06:04:49.634Z",
+    "postedBy": "REC001",
+    "postedByRole": "recruiter",
+    "submittedBy": "REC001",
+    "approvedBy": "ADM001",
+    "submittedAt": "2025-09-29T06:04:49.634Z",
+    "approvedAt": "2025-09-29T06:16:13.839Z",
+    "adminNotes": "",
+    "recruiterNotes": "",
+    "rejectionReason": "",
+    "updatedAt": "2025-09-29T06:16:13.839Z"
   }
 ]

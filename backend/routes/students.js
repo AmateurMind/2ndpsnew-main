@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticate, authorize, verifyStudentAccess } = require('../middleware/auth');
 const router = express.Router();
 
 const studentsPath = path.join(__dirname, '../data/students.json');
@@ -103,12 +103,17 @@ router.post('/demo-add', (req, res) => {
 });
 
 // Get all students (admin/mentor/recruiter only)
-router.get('/', authenticate, authorize('admin', 'mentor', 'recruiter'), (req, res) => {
+router.get('/', authenticate, authorize('admin', 'mentor', 'recruiter'), verifyStudentAccess, (req, res) => {
   try {
     const students = readStudents();
     const { department, semester, skills, cgpa } = req.query;
     
     let filteredStudents = students.filter(student => {
+      // For recruiters, only show students who applied to their internships
+      if (req.user.role === 'recruiter' && req.allowedStudents && !req.allowedStudents.includes(student.id)) {
+        return false;
+      }
+      
       if (department && student.department !== department) return false;
       if (semester && student.semester !== parseInt(semester)) return false;
       if (cgpa && student.cgpa < parseFloat(cgpa)) return false;
@@ -122,8 +127,36 @@ router.get('/', authenticate, authorize('admin', 'mentor', 'recruiter'), (req, r
       return true;
     });
     
-    // Remove sensitive data
-    filteredStudents = filteredStudents.map(({ password, ...student }) => student);
+    // Remove sensitive data and add application context for recruiters
+    filteredStudents = filteredStudents.map(({ password, ...student }) => {
+      if (req.user.role === 'recruiter' && req.allowedStudents) {
+        // Add context about which internships the student applied to
+        try {
+          const applicationsPath = path.join(__dirname, '../data/applications.json');
+          const internshipsPath = path.join(__dirname, '../data/internships.json');
+          const applications = JSON.parse(fs.readFileSync(applicationsPath, 'utf8'));
+          const internships = JSON.parse(fs.readFileSync(internshipsPath, 'utf8'));
+          
+          const studentApplications = applications.filter(app => 
+            app.studentId === student.id && req.recruiterInternships.includes(app.internshipId)
+          );
+          
+          student.applicationContext = studentApplications.map(app => {
+            const internship = internships.find(i => i.id === app.internshipId);
+            return {
+              internshipId: app.internshipId,
+              internshipTitle: internship?.title || 'Unknown',
+              applicationStatus: app.status,
+              appliedAt: app.appliedAt
+            };
+          });
+        } catch (error) {
+          console.error('Error adding application context:', error);
+          student.applicationContext = [];
+        }
+      }
+      return student;
+    });
     
     res.json({ students: filteredStudents, total: filteredStudents.length });
   } catch (error) {

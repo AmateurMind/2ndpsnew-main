@@ -23,7 +23,8 @@ const emptyForm = {
   maxApplications: 50,
   companyDescription: '',
   requirements: '',
-  benefits: ''
+  benefits: '',
+  recruiterNotes: ''
 };
 
 const RecruiterInternships = () => {
@@ -99,7 +100,8 @@ const RecruiterInternships = () => {
       maxApplications: internship.maxApplications || 50,
       companyDescription: internship.companyDescription || '',
       requirements: (internship.requirements || []).join('\n'),
-      benefits: (internship.benefits || []).join('\n')
+      benefits: (internship.benefits || []).join('\n'),
+      recruiterNotes: internship.recruiterNotes || ''
     });
     setIsEditing(true);
     setShowForm(true);
@@ -126,15 +128,23 @@ const RecruiterInternships = () => {
         maxApplications: Number(form.maxApplications),
         companyDescription: form.companyDescription,
         requirements: form.requirements.split('\n').map(r => r.trim()).filter(Boolean),
-        benefits: form.benefits.split('\n').map(b => b.trim()).filter(Boolean)
+        benefits: form.benefits.split('\n').map(b => b.trim()).filter(Boolean),
+        recruiterNotes: form.recruiterNotes
       };
 
       if (isEditing) {
-        await axios.put(`/internships/${form.id}`, payload);
-        toast.success('Internship updated successfully');
+        // For editing rejected proposals, resubmit them
+        const currentInternship = internships.find(i => i.id === form.id);
+        if (currentInternship?.status === 'rejected') {
+          await axios.post('/internships/submit', payload);
+          toast.success('Proposal resubmitted for approval');
+        } else {
+          await axios.put(`/internships/${form.id}`, payload);
+          toast.success('Internship updated successfully');
+        }
       } else {
-        await axios.post('/internships', payload);
-        toast.success('Internship posted successfully');
+        await axios.post('/internships/submit', payload);
+        toast.success('Proposal submitted for admin approval');
       }
       setShowForm(false);
       await fetchMyInternships();
@@ -177,31 +187,37 @@ const RecruiterInternships = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-secondary-900">My Internship Postings</h1>
-          <p className="text-secondary-600 mt-1">Manage internship opportunities for {user.company}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-secondary-900">My Internship Submissions</h1>
+          <p className="text-secondary-600 mt-1">Submit and manage internship proposals for {user.company}</p>
         </div>
         <button onClick={openCreate} className="btn-primary flex items-center justify-center">
-          <Plus className="h-4 w-4 mr-2" /> Post New Internship
+          <Plus className="h-4 w-4 mr-2" /> Submit New Proposal
         </button>
       </div>
 
       {/* Statistics */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
         <div className="card p-4">
           <div className="text-2xl font-bold text-primary-600">{internships.length}</div>
-          <div className="text-sm text-secondary-600">Total Postings</div>
+          <div className="text-sm text-secondary-600">Total Submissions</div>
+        </div>
+        <div className="card p-4">
+          <div className="text-2xl font-bold text-yellow-600">
+            {internships.filter(i => i.status === 'submitted').length}
+          </div>
+          <div className="text-sm text-secondary-600">Pending Approval</div>
         </div>
         <div className="card p-4">
           <div className="text-2xl font-bold text-green-600">
             {internships.filter(i => i.status === 'active').length}
           </div>
-          <div className="text-sm text-secondary-600">Active Postings</div>
+          <div className="text-sm text-secondary-600">Approved & Active</div>
         </div>
         <div className="card p-4">
-          <div className="text-2xl font-bold text-blue-600">
-            {internships.reduce((sum, i) => sum + (i.currentApplications || 0), 0)}
+          <div className="text-2xl font-bold text-red-600">
+            {internships.filter(i => i.status === 'rejected').length}
           </div>
-          <div className="text-sm text-secondary-600">Total Applications</div>
+          <div className="text-sm text-secondary-600">Rejected</div>
         </div>
       </div>
 
@@ -209,10 +225,10 @@ const RecruiterInternships = () => {
       {internships.length === 0 ? (
         <div className="card p-8 text-center">
           <Building className="h-12 w-12 text-secondary-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-secondary-900 mb-2">No internships posted yet</h3>
-          <p className="text-secondary-600 mb-4">Start by posting your first internship opportunity</p>
+          <h3 className="text-lg font-semibold text-secondary-900 mb-2">No proposals submitted yet</h3>
+          <p className="text-secondary-600 mb-4">Start by submitting your first internship proposal for admin approval</p>
           <button onClick={openCreate} className="btn-primary">
-            <Plus className="h-4 w-4 mr-2" /> Post Your First Internship
+            <Plus className="h-4 w-4 mr-2" /> Submit First Proposal
           </button>
         </div>
       ) : (
@@ -232,9 +248,16 @@ const RecruiterInternships = () => {
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                   internship.status === 'active' 
                     ? 'bg-green-100 text-green-800' 
+                    : internship.status === 'submitted'
+                    ? 'bg-yellow-100 text-yellow-800'
+                    : internship.status === 'rejected'
+                    ? 'bg-red-100 text-red-800'
                     : 'bg-secondary-100 text-secondary-800'
                 }`}>
-                  {internship.status || 'active'}
+                  {internship.status === 'submitted' ? 'Pending Approval' :
+                   internship.status === 'rejected' ? 'Rejected' :
+                   internship.status === 'active' ? 'Approved' :
+                   internship.status || 'Unknown'}
                 </span>
               </div>
 
@@ -270,30 +293,72 @@ const RecruiterInternships = () => {
                 )}
               </div>
 
+              {/* Admin feedback */}
+              {(internship.adminNotes || internship.rejectionReason) && (
+                <div className="bg-blue-50 border-l-4 border-blue-400 p-3 mb-4">
+                  <div className="text-sm font-medium text-blue-800">Admin Feedback:</div>
+                  <div className="text-sm text-blue-700 mt-1">
+                    {internship.rejectionReason || internship.adminNotes}
+                  </div>
+                </div>
+              )}
+              
               <div className="text-sm text-secondary-600 mb-4">
                 <span className="font-medium">{internship.currentApplications || 0}</span> applications received
+                {internship.status === 'submitted' && (
+                  <span className="ml-2 text-yellow-600">• Awaiting admin review</span>
+                )}
               </div>
 
               <div className="flex gap-2">
-                <button 
-                  onClick={() => openEdit(internship)} 
-                  className="btn-outline flex-1 flex items-center justify-center text-sm"
-                >
-                  <Pencil className="h-4 w-4 mr-1" /> Edit
-                </button>
-                <button 
-                  onClick={() => toggleStatus(internship)} 
-                  className="btn-primary flex-1 flex items-center justify-center text-sm"
-                >
-                  {internship.status === 'active' ? 'Pause' : 'Activate'}
-                </button>
-                <button 
-                  onClick={() => confirmDelete(internship.id)} 
-                  className="btn-danger flex items-center justify-center text-sm px-3"
-                  title="Delete internship"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
+                {internship.status === 'submitted' ? (
+                  <>
+                    <button 
+                      className="btn-outline flex-1 flex items-center justify-center text-sm cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      <Pencil className="h-4 w-4 mr-1" /> Pending Review
+                    </button>
+                    <button 
+                      onClick={() => confirmDelete(internship.id)} 
+                      className="btn-danger flex items-center justify-center text-sm px-3"
+                      title="Cancel submission"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </>
+                ) : internship.status === 'rejected' ? (
+                  <>
+                    <button 
+                      onClick={() => openEdit(internship)} 
+                      className="btn-outline flex-1 flex items-center justify-center text-sm"
+                    >
+                      <Pencil className="h-4 w-4 mr-1" /> Revise & Resubmit
+                    </button>
+                    <button 
+                      onClick={() => confirmDelete(internship.id)} 
+                      className="btn-danger flex items-center justify-center text-sm px-3"
+                      title="Delete proposal"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button 
+                      onClick={() => openEdit(internship)} 
+                      className="btn-outline flex-1 flex items-center justify-center text-sm"
+                    >
+                      <Pencil className="h-4 w-4 mr-1" /> Edit
+                    </button>
+                    <button 
+                      onClick={() => toggleStatus(internship)} 
+                      className="btn-primary flex-1 flex items-center justify-center text-sm"
+                    >
+                      {internship.status === 'active' ? 'Pause' : 'Activate'}
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           ))}
@@ -312,7 +377,7 @@ const RecruiterInternships = () => {
           >
             <div className="flex items-center justify-between border-b border-secondary-200 p-6 flex-shrink-0">
               <h2 className="text-xl font-semibold text-secondary-900">
-                {isEditing ? 'Edit Internship Posting' : 'Post New Internship'}
+                {isEditing ? 'Edit Internship Proposal' : 'Submit Internship Proposal'}
               </h2>
               <div className="flex items-center gap-2">
                 <button type="button" className="btn-secondary" onClick={() => setShowForm(false)}>
@@ -572,12 +637,25 @@ const RecruiterInternships = () => {
                   </div>
                 </div>
 
+                {/* Recruiter Notes */}
+                <div>
+                  <label className="block text-sm font-medium text-secondary-700 mb-1">
+                    Additional Notes for Admin (Optional)
+                  </label>
+                  <textarea 
+                    className="input-field h-24" 
+                    value={form.recruiterNotes} 
+                    onChange={(e) => setForm({...form, recruiterNotes: e.target.value})} 
+                    placeholder="Any additional information for the placement cell to review..."
+                  />
+                </div>
+
                 <div className="flex justify-end gap-3 pt-4 border-t border-secondary-200">
                   <button type="button" className="btn-secondary" onClick={() => setShowForm(false)}>
                     Cancel
                   </button>
                   <button type="submit" className="btn-primary">
-                    {isEditing ? 'Update Internship' : 'Post Internship'}
+                    {isEditing ? 'Update Proposal' : 'Submit for Approval'}
                   </button>
                 </div>
               </form>

@@ -27,9 +27,12 @@ const emptyForm = {
 const AdminInternships = () => {
   const [loading, setLoading] = useState(true);
   const [internships, setInternships] = useState([]);
+  const [pending, setPending] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState(emptyForm);
   const [isEditing, setIsEditing] = useState(false);
+  const [adminNotes, setAdminNotes] = useState('');
+  const [rejectionReason, setRejectionReason] = useState('');
 
   useEffect(() => {
     fetchInternships();
@@ -54,12 +57,32 @@ const AdminInternships = () => {
   };
 
   const fetchInternships = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const res = await axios.get('/internships');
-      setInternships(res.data.internships || []);
-    } catch (e) {
-      toast.error('Failed to load internships');
+      let allRes;
+      try {
+        allRes = await axios.get('/internships');
+      } catch (errPrimary) {
+        // Fallback: try explicitly requesting active internships
+        try {
+          allRes = await axios.get('/internships?status=active');
+        } catch (errFallback) {
+          console.error('Admin internships load error:', errFallback?.response?.data || errFallback?.message);
+          toast.error(errFallback?.response?.data?.error || 'Failed to load internships');
+          allRes = { data: { internships: [] } };
+        }
+      }
+
+      let pendingRes;
+      try {
+        pendingRes = await axios.get('/internships/pending');
+      } catch (errPending) {
+        console.warn('Pending submissions load failed:', errPending?.response?.data || errPending?.message);
+        pendingRes = { data: { internships: [] } };
+      }
+
+      setInternships(allRes.data.internships || []);
+      setPending(pendingRes.data.internships || []);
     } finally {
       setLoading(false);
     }
@@ -162,14 +185,65 @@ const AdminInternships = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
         <h1 className="text-2xl sm:text-3xl font-bold text-secondary-900">Manage Internships</h1>
         <button onClick={openCreate} className="btn-primary flex items-center justify-center">
           <Plus className="h-4 w-4 mr-2" /> New Internship
         </button>
       </div>
 
-      {/* List */}
+      {pending.length > 0 && (
+        <div className="mb-6 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800">
+          You have <span className="font-semibold">{pending.length}</span> pending submission{pending.length>1?'s':''} awaiting review.
+        </div>
+      )}
+
+      {/* Pending Submissions */}
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold mb-3">Pending Submissions</h2>
+        {pending.length === 0 ? (
+          <div className="card p-4 text-secondary-600">No pending submissions</div>
+        ) : (
+          <div className="space-y-3">
+            {pending.map((p) => (
+              <div key={p.id} className="card p-4">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="font-semibold">{p.title}</div>
+                    <div className="text-sm text-secondary-600">{p.company} • Submitted by {p.submittedBy} on {new Date(p.submittedAt).toLocaleString()}</div>
+                  </div>
+                  <span className="px-2 py-0.5 rounded-full text-xs bg-yellow-100 text-yellow-800">Pending</span>
+                </div>
+                <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-sm font-medium">Admin Notes</label>
+                    <textarea className="input-field h-20" value={adminNotes} onChange={(e)=>setAdminNotes(e.target.value)} placeholder="Optional notes for recruiter" />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Rejection Reason</label>
+                    <textarea className="input-field h-20" value={rejectionReason} onChange={(e)=>setRejectionReason(e.target.value)} placeholder="Required if rejecting" />
+                  </div>
+                </div>
+                <div className="mt-3 flex gap-2">
+                  <button 
+                    onClick={async()=>{try{await axios.put(`/internships/${p.id}/approve`,{adminNotes}); toast.success('Approved'); setAdminNotes(''); setRejectionReason(''); fetchInternships();}catch(e){toast.error(e.response?.data?.error||'Approve failed')}}} 
+                    className="btn-primary">
+                    Approve
+                  </button>
+                  <button 
+                    onClick={async()=>{if(!rejectionReason){return toast.error('Enter rejection reason');} try{await axios.put(`/internships/${p.id}/reject`,{rejectionReason, adminNotes}); toast.success('Rejected'); setAdminNotes(''); setRejectionReason(''); fetchInternships();}catch(e){toast.error(e.response?.data?.error||'Reject failed')}}} 
+                    className="btn-danger">
+                    Reject
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* All Internships */}
+      <h2 className="text-xl font-semibold mb-3">All Internships</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {internships.map((i) => (
           <div key={i.id} className="card p-4">
@@ -191,9 +265,22 @@ const AdminInternships = () => {
             </div>
             <div className="mt-3">
               <div className="flex flex-wrap gap-1 mb-2">
-                <span className={`px-2 py-0.5 rounded-full text-xs ${i.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-secondary-100 text-secondary-700'}`}>
-                  {i.status || 'active'}
+                <span className={`px-2 py-0.5 rounded-full text-xs ${
+                  i.status === 'active' ? 'bg-green-100 text-green-700' :
+                  i.status === 'submitted' ? 'bg-yellow-100 text-yellow-700' :
+                  i.status === 'rejected' ? 'bg-red-100 text-red-700' :
+                  'bg-secondary-100 text-secondary-700'
+                }`}>
+                  {i.status === 'submitted' ? 'Pending' :
+                   i.status === 'rejected' ? 'Rejected' :
+                   i.status === 'active' ? 'Active' :
+                   i.status || 'active'}
                 </span>
+                {i.submittedBy && (
+                  <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs">
+                    By: {i.submittedBy}
+                  </span>
+                )}
               </div>
               <div className="flex flex-wrap gap-1">
                 {(i.requiredSkills || []).slice(0,4).map((s) => (

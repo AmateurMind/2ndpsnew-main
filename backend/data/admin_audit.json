@@ -1,0 +1,13 @@
+[
+  {
+    "timestamp": "2025-09-29T06:16:13.840Z",
+    "adminId": "ADM001",
+    "action": "APPROVE_INTERNSHIP",
+    "details": {
+      "internshipId": "INT013",
+      "title": "Frontend",
+      "submittedBy": "REC001",
+      "adminNotes": ""
+    }
+  }
+]
