@@ -75,14 +75,20 @@ const authorize = (...roles) => {
 };
 
 // Optional authentication (for public routes that can benefit from user context)
-const optionalAuth = (req, res, next) => {
+const optionalAuth = async (req, res, next) => {
   const token = req.header('Authorization')?.replace('Bearer ', '');
   
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET || 'campus-placement-secret');
-      const users = loadUsers();
-      const user = users.find(u => u.id === decoded.id && u.email === decoded.email);
+      
+      // Find user in appropriate collection
+      let user = null;
+      user = await Student.findOne({ id: decoded.id, email: decoded.email }).lean();
+      if (!user) user = await Admin.findOne({ id: decoded.id, email: decoded.email }).lean();
+      if (!user) user = await Mentor.findOne({ id: decoded.id, email: decoded.email }).lean();
+      if (!user) user = await Recruiter.findOne({ id: decoded.id, email: decoded.email }).lean();
+      
       req.user = user;
     } catch (error) {
       // Token invalid, but continue without user context
@@ -166,7 +172,6 @@ module.exports = {
   authenticate,
   authorize,
   optionalAuth,
-  loadUsers,
   verifyInternshipOwnership,
   verifyStudentAccess,
   logAdminAction
