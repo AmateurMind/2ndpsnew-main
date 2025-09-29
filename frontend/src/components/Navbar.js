@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
@@ -19,6 +19,19 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = originalOverflow || '';
+    }
+    return () => {
+      document.body.style.overflow = originalOverflow || '';
+    };
+  }, [isMobileMenuOpen]);
 
   const handleLogout = () => {
     logout();
@@ -125,8 +138,12 @@ const Navbar = () => {
 
             {/* Mobile menu button */}
             <button
+              type="button"
+              aria-label="Toggle navigation menu"
+              aria-controls="mobile-menu"
+              aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-md text-secondary-600 hover:text-secondary-900 hover:bg-secondary-100"
+              className="touch-target md:hidden p-3 rounded-md text-secondary-600 hover:text-secondary-900 hover:bg-secondary-100 active:bg-secondary-200"
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -140,7 +157,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-secondary-200">
+        <div id="mobile-menu" className="md:hidden bg-white border-t border-secondary-200">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navigationItems.map((item) => {
               const Icon = item.icon;
@@ -154,7 +171,7 @@ const Navbar = () => {
                   className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium ${
                     isActive 
                       ? 'text-primary-600 bg-primary-50' 
-                      : 'text-secondary-600 hover:text-primary-600 hover:bg-secondary-100'
+                      : 'text-secondary-600 hover:text-primary-600 hover:bg-secondary-100 active:bg-secondary-200 active:text-primary-700'
                   }`}
                 >
                   <Icon className="h-5 w-5" />
@@ -184,7 +201,7 @@ const Navbar = () => {
               </div>
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center space-x-2 px-3 py-2 text-base font-medium text-red-600 hover:bg-red-50 rounded-md"
+                className="w-full flex items-center space-x-2 px-3 py-2 text-base font-medium text-red-600 hover:bg-red-50 active:bg-red-100 rounded-md"
               >
                 <LogOut className="h-5 w-5" />
                 <span>Logout</span>

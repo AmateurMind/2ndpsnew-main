@@ -5,28 +5,38 @@
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a, button, [role="button"], input[type="button"], input[type="submit"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-primary-600 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-primary-700 active:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   
   .btn-secondary {
-    @apply bg-secondary-100 text-secondary-900 px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-secondary-100 text-secondary-900 px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-secondary-200 active:bg-secondary-300 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   
   .btn-outline {
-    @apply border border-primary-600 text-primary-600 px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply border border-primary-600 text-primary-600 px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-primary-50 active:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   
   .btn-danger {
-    @apply bg-red-600 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-red-600 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-red-700 active:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   
   .btn-success {
-    @apply bg-green-600 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-green-600 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-medium text-sm sm:text-base hover:bg-green-700 active:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   
   .btn-disabled {
@@ -42,10 +52,16 @@
   }
   
   .navbar-item {
-    @apply text-secondary-600 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200;
+    @apply text-secondary-600 hover:text-primary-600 active:text-primary-700 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-secondary-100 active:bg-secondary-200;
   }
   
   .navbar-item-active {
     @apply text-primary-600 bg-primary-50 px-3 py-2 rounded-md text-sm font-medium;
+  }
+
+  /* Ensure comfortable tap targets on touch devices */
+  .touch-target {
+    min-height: 44px; /* Apple HIG recommended minimum touch size */
+    min-width: 44px;
   }
 }
