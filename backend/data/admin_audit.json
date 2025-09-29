@@ -135,5 +135,14 @@
       "internshipId": "INT012",
       "title": "Cloud Infrastructure Intern"
     }
+  },
+  {
+    "timestamp": "2025-09-29T14:36:13.652Z",
+    "adminId": "ADM001",
+    "action": "DELETE_INTERNSHIP",
+    "details": {
+      "internshipId": "INT013",
+      "title": "ML engineer"
+    }
   }
 ]
