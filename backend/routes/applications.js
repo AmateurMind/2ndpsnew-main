@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const { authenticate, authorize } = require('../middleware/auth');
+const { notifyApplicationStatusChange } = require('../utils/notify');
 const router = express.Router();
 
 const applicationsPath = path.join(__dirname, '../data/applications.json');
@@ -229,6 +230,31 @@ router.put('/:id/status', authenticate, authorize('mentor', 'admin'), (req, res)
     
     applications[applicationIndex] = updatedApplication;
     writeApplications(applications);
+
+    // Send email notification to student (do not block response)
+    try {
+      const students = readStudents();
+      const internships = readInternships();
+      const student = students.find(s => s.id === application.studentId);
+      const internship = internships.find(i => i.id === application.internshipId);
+
+      notifyApplicationStatusChange({
+        student,
+        internship,
+        status,
+        feedback,
+        interviewDetails,
+        offerDetails
+      }).then((result) => {
+        if (!result?.ok && !result?.skipped) {
+          console.warn('Email notify failed:', result);
+        }
+      }).catch((err) => {
+        console.warn('Email notify error:', err);
+      });
+    } catch (notifyErr) {
+      console.warn('Notification dispatch error:', notifyErr);
+    }
     
     res.json({
       message: 'Application status updated successfully',

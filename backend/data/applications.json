@@ -3,7 +3,7 @@
     "id": "APP001",
     "studentId": "STU001",
     "internshipId": "INT001",
-    "status": "rejected",
+    "status": "offered",
     "appliedAt": "2024-03-15T10:30:00.000Z",
     "coverLetter": "I am excited to apply for the Frontend Development Intern position. My experience with React and JavaScript makes me a perfect fit for this role.",
     "mentorId": "MEN001",
@@ -12,7 +12,7 @@
     "interviewScheduled": null,
     "interviewFeedback": null,
     "finalStatus": null,
-    "updatedAt": "2025-09-28T14:14:09.037Z"
+    "updatedAt": "2025-09-29T06:23:14.057Z"
   },
   {
     "id": "APP002",
