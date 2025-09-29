@@ -83,9 +83,46 @@ const StudentDashboard = () => {
           Welcome back, {user.name}!
         </h1>
         <p className="text-secondary-600 mt-2">
-          Here's what's happening with your internship journey
+          {user.isPlaced ? (
+            `Congratulations on your placement! 🎉`
+          ) : (
+            `Here's what's happening with your internship journey`
+          )}
         </p>
       </div>
+
+      {/* Placement Success Banner - Only show if user is placed */}
+      {user.isPlaced && user.placedAt && (
+        <div className="mb-8 card bg-gradient-to-r from-green-50 to-emerald-50 border-green-200 p-6">
+          <div className="flex items-start space-x-4">
+            <div className="flex-shrink-0">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <TrendingUp className="h-6 w-6 text-green-600" />
+              </div>
+            </div>
+            <div className="flex-1">
+              <h2 className="text-xl font-bold text-green-900 mb-2">
+                🎉 Congratulations on your placement!
+              </h2>
+              <div className="text-green-800 space-y-1">
+                <p className="font-semibold">
+                  {user.placedAt.position} at {user.placedAt.company}
+                </p>
+                <div className="flex flex-wrap gap-4 text-sm">
+                  <span className="flex items-center">
+                    <DollarSign className="h-4 w-4 mr-1" />
+                    {user.placedAt.package}
+                  </span>
+                  <span className="flex items-center">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    Joining: {new Date(user.placedAt.joinDate).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -133,14 +170,29 @@ const StudentDashboard = () => {
 
         <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-2 bg-orange-50 rounded-lg">
-              <Star className="h-6 w-6 text-orange-600" />
+            <div className={`p-2 rounded-lg ${
+              user.isPlaced ? 'bg-green-50' : 'bg-orange-50'
+            }`}>
+              {user.isPlaced ? (
+                <TrendingUp className="h-6 w-6 text-green-600" />
+              ) : (
+                <Star className="h-6 w-6 text-orange-600" />
+              )}
             </div>
             <div className="ml-4">
-              <p className="text-sm text-secondary-600">Profile Status</p>
+              <p className="text-sm text-secondary-600">Placement Status</p>
               <p className="text-lg font-semibold text-secondary-900">
-                {user.cgpa >= 8 ? '⭐ Excellent' : user.cgpa >= 7 ? '🎯 Good' : '📈 Growing'}
+                {user.isPlaced ? (
+                  <span className="text-green-600">🎉 Placed</span>
+                ) : (
+                  <span className="text-orange-600">🔍 Seeking</span>
+                )}
               </p>
+              {user.isPlaced && user.placedAt && (
+                <p className="text-xs text-secondary-500 mt-1">
+                  {user.placedAt.company} • {user.placedAt.position}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -207,13 +259,15 @@ const StudentDashboard = () => {
           <div className="card p-6">
             <h2 className="text-base sm:text-lg font-bold text-secondary-900 mb-4">Quick Actions</h2>
             <div className="space-y-3">
-              <Link 
-                to="/student/internships"
-                className="w-full btn-primary flex items-center justify-center"
-              >
-                <BookOpen className="h-4 w-4 mr-2" />
-                Browse Internships
-              </Link>
+              {!user.isPlaced && (
+                <Link 
+                  to="/student/internships"
+                  className="w-full btn-primary flex items-center justify-center"
+                >
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Browse Internships
+                </Link>
+              )}
               <Link 
                 to="/student/profile"
                 className="w-full sm:w-auto btn-outline flex items-center justify-center"
@@ -228,6 +282,13 @@ const StudentDashboard = () => {
                 <FileText className="h-4 w-4 mr-2" />
                 My Applications
               </Link>
+              {user.isPlaced && (
+                <div className="bg-green-50 rounded-lg p-3 text-center">
+                  <p className="text-sm text-green-800 font-medium">
+                    🎆 You're all set! Focus on preparing for your new role.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
