@@ -2,10 +2,21 @@ const OpenAI = require('openai');
 
 class OpenAIService {
   constructor() {
+    // Check if using OpenRouter (keys starting with sk-or-)
+    const isOpenRouter = process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY.startsWith('sk-or-');
+    
     this.client = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
+      baseURL: isOpenRouter ? 'https://openrouter.ai/api/v1' : undefined,
+      defaultHeaders: isOpenRouter ? {
+        'HTTP-Referer': process.env.FRONTEND_URL || 'http://localhost:3000',
+        'X-Title': 'Campus Placement Portal'
+      } : undefined
     });
-    this.model = 'gpt-4o-mini'; // Using the more cost-effective model
+    
+    // Use Gemini Flash model for OpenRouter, GPT for direct OpenAI
+    this.model = isOpenRouter ? 'google/gemini-flash-1.5' : 'gpt-4o-mini';
+    this.isOpenRouter = isOpenRouter;
   }
 
   /**
