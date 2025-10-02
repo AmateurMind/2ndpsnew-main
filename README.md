@@ -272,19 +272,6 @@ Our campus placement portal is a **fully functional application** with enterpris
 - **Accessibility**: WCAG compliant with screen reader support
 - **Dark/Light Theme**: Consistent design across all components
 
-## 🔧 Configuration
-
-### Environment Variables
-
-Create a `.env` file in the backend directory:
-
-```env
-NODE_ENV=development
-PORT=5000
-FRONTEND_URL=http://localhost:3000
-JWT_SECRET=your-super-secret-jwt-key
-```
-
 ## 🚢 Deployment
 
 ### Frontend (Vercel)
@@ -329,15 +316,3 @@ JWT_SECRET=your-super-secret-jwt-key
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🎓 About
-
-This project was created as a comprehensive solution for managing campus internship and placement processes. It demonstrates modern web development practices with React, Node.js, and responsive design principles.
-
----
-
-**Made with ❤️ for educational institutions and students worldwide**
